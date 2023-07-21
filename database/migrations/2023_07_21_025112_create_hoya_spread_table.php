@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hoya_spreads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hoya')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('hoya_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string("latitude");
             $table->string("longitude");
             $table->string("description");
