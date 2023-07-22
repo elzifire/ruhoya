@@ -22,6 +22,15 @@ return new class extends Migration
             $table->string("publication_link");
             $table->string("etymology");
             $table->string("benefit");
+            $table->string("stem")->nullable();             // Batang
+            $table->string("leaves")->nullable();           // Daun
+            $table->string("flowers")->nullable();          // Bentuk bunga
+            $table->string("flower_buds")->nullable();      // Kuncup bunga
+            $table->string("flower_size")->nullable();      // Ukuran bunga
+            $table->string("flower_colors")->nullable();    // Warna bunga
+            $table->string("roots")->nullable();            // Akar
+            $table->string("shoots")->nullable();           // Tunas
+            $table->string("reproduction_system")->nullable();  // Sistem reproduksi
             $table->timestamps();
             $table->softDeletes();
         });

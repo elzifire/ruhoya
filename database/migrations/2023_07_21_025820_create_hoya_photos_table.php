@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hoya_photos', function (Blueprint $table) {
+        Schema::create('hoya_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hoya_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('hoya_id');
             $table->string("image");
             $table->string("description");
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('hoya_id')->references('id')->on('hoyas')->onDelete('cascade');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hoya_photos');
+        Schema::dropIfExists('hoya_images');
     }
 };
