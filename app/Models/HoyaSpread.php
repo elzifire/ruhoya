@@ -16,4 +16,14 @@ class HoyaSpread extends Model
         "longitude",
         "description",
     ];
+
+    public static function rules()
+    {
+        return [
+            "hoya_id"       => "requried",
+            "latitude"      => "required",
+            "longitude"     => "required",
+            "description"   => "required",
+        ];
+    }
 }
