@@ -30,4 +30,12 @@ Route::middleware("auth")->group(function() {
     Route::get("/hoya/edit/{id}", "HoyaController@edit");
     Route::post("/hoya/update/{id}", "HoyaController@update");
     Route::get("/hoya/delete/{id}", "HoyaController@destroy");
+
+    Route::get("/insect-association", "InsectAssociationController@index");
+    Route::get("/insect-association/api", "InsectAssociationController@api");
+    Route::get("/insect-association/create", "InsectAssociationController@create");
+    Route::post("/insect-association/store", "InsectAssociationController@store");
+    Route::get("/insect-association/edit/{id}", "InsectAssociationController@edit");
+    Route::post("/insect-association/update/{id}", "InsectAssociationController@update");
+    Route::get("/insect-association/delete/{id}", "InsectAssociationController@destroy");
 });
