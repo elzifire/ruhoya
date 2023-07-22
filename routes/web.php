@@ -38,4 +38,12 @@ Route::middleware("auth")->group(function() {
     Route::get("/insect-association/edit/{id}", "InsectAssociationController@edit");
     Route::post("/insect-association/update/{id}", "InsectAssociationController@update");
     Route::get("/insect-association/delete/{id}", "InsectAssociationController@destroy");
+
+    Route::get("/pest", "PestController@index");
+    Route::get("/pest/api", "PestController@api");
+    Route::get("/pest/create", "PestController@create");
+    Route::post("/pest/store", "PestController@store");
+    Route::get("/pest/edit/{id}", "PestController@edit");
+    Route::post("/pest/update/{id}", "PestController@update");
+    Route::get("/pest/delete/{id}", "PestController@destroy");
 });
