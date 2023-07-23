@@ -17,11 +17,11 @@ Route::middleware("guest")->group(function() {
     Route::get("login", "AuthController@index")->name("login");
     Route::post("login", "AuthController@login");
 });
-Route::get("/", function() {
-    return phpinfo();
-});
 
 Route::middleware("auth")->group(function() {
+    Route::get("logout", "AuthController@logout");
+    
+    Route::get("/", "HomeController@index");
 
     Route::get("/hoya", "HoyaController@index");
     Route::get("/hoya/api", "HoyaController@api");

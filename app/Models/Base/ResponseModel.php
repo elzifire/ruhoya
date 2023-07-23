@@ -11,7 +11,7 @@ class ResponseModel
     public $message = HttpMessage::SUCCESS_READ;
     public $data = null;
 
-    public function __construct($statusCode, $message)
+    public function __construct($statusCode = HttpStatus::SUCCESS, $message = HttpMessage::SUCCESS_READ)
     {
         if ($statusCode) $this->status_code = $statusCode;
         if ($message) $this->message = $message;
