@@ -36,7 +36,7 @@ class AuthController extends Controller
 
             $response->status_code = HttpStatus::SUCCESS;
             $response->message     = HttpMessage::AUTH_SUCCESS_LOGIN;
-            $response->redirect_to = url("/");
+            $response->redirect_to = url("/admin");
         }
 
         return response()->json($response, $response->status_code);

@@ -30,8 +30,8 @@ class InsectAssociationController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [
-                        "edit"      => url("/insect-association/edit/".$data->id),
-                        "delete"    => url("/insect-association/delete/".$data->id),
+                        "edit"      => url("admin/insect-association/edit/".$data->id),
+                        "delete"    => url("admin/insect-association/delete/".$data->id),
                     ]);
                 })
                 ->rawColumns(['action'])
@@ -40,7 +40,7 @@ class InsectAssociationController extends Controller
 
     public function create()
     {
-        $action = url('/insect-association/store');
+        $action = url('admin/insect-association/store');
         return view("pages.insect-association.form", compact("action"));
     }
 
@@ -77,7 +77,7 @@ class InsectAssociationController extends Controller
     }
     public function edit($id)
     {
-        $action = url('/insect-association/update/' . $id);
+        $action = url('admin/insect-association/update/' . $id);
         $data   = Model::findOrFail($id);
 
         return view("pages.insect-association.form", compact("action", "data"));

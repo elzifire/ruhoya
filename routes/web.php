@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("/", function() { return view("layouts.FE.master"); });
+
 Route::middleware("guest")->group(function() {
     Route::get("login", "AuthController@index")->name("login");
     Route::post("login", "AuthController@login");
@@ -21,29 +23,31 @@ Route::middleware("guest")->group(function() {
 Route::middleware("auth")->group(function() {
     Route::get("logout", "AuthController@logout");
     
-    Route::get("/", "HomeController@index");
-
-    Route::get("/hoya", "HoyaController@index");
-    Route::get("/hoya/api", "HoyaController@api");
-    Route::get("/hoya/create", "HoyaController@create");
-    Route::post("/hoya/store", "HoyaController@store");
-    Route::get("/hoya/edit/{id}", "HoyaController@edit");
-    Route::post("/hoya/update/{id}", "HoyaController@update");
-    Route::get("/hoya/delete/{id}", "HoyaController@destroy");
-
-    Route::get("/insect-association", "InsectAssociationController@index");
-    Route::get("/insect-association/api", "InsectAssociationController@api");
-    Route::get("/insect-association/create", "InsectAssociationController@create");
-    Route::post("/insect-association/store", "InsectAssociationController@store");
-    Route::get("/insect-association/edit/{id}", "InsectAssociationController@edit");
-    Route::post("/insect-association/update/{id}", "InsectAssociationController@update");
-    Route::get("/insect-association/delete/{id}", "InsectAssociationController@destroy");
-
-    Route::get("/pest", "PestController@index");
-    Route::get("/pest/api", "PestController@api");
-    Route::get("/pest/create", "PestController@create");
-    Route::post("/pest/store", "PestController@store");
-    Route::get("/pest/edit/{id}", "PestController@edit");
-    Route::post("/pest/update/{id}", "PestController@update");
-    Route::get("/pest/delete/{id}", "PestController@destroy");
+    Route::prefix("admin")->group(function() {
+        Route::get("/", "HomeController@index");
+    
+        Route::get("/hoya", "HoyaController@index");
+        Route::get("/hoya/api", "HoyaController@api");
+        Route::get("/hoya/create", "HoyaController@create");
+        Route::post("/hoya/store", "HoyaController@store");
+        Route::get("/hoya/edit/{id}", "HoyaController@edit");
+        Route::post("/hoya/update/{id}", "HoyaController@update");
+        Route::get("/hoya/delete/{id}", "HoyaController@destroy");
+    
+        Route::get("/insect-association", "InsectAssociationController@index");
+        Route::get("/insect-association/api", "InsectAssociationController@api");
+        Route::get("/insect-association/create", "InsectAssociationController@create");
+        Route::post("/insect-association/store", "InsectAssociationController@store");
+        Route::get("/insect-association/edit/{id}", "InsectAssociationController@edit");
+        Route::post("/insect-association/update/{id}", "InsectAssociationController@update");
+        Route::get("/insect-association/delete/{id}", "InsectAssociationController@destroy");
+    
+        Route::get("/pest", "PestController@index");
+        Route::get("/pest/api", "PestController@api");
+        Route::get("/pest/create", "PestController@create");
+        Route::post("/pest/store", "PestController@store");
+        Route::get("/pest/edit/{id}", "PestController@edit");
+        Route::post("/pest/update/{id}", "PestController@update");
+        Route::get("/pest/delete/{id}", "PestController@destroy");
+    });
 });

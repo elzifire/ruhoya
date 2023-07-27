@@ -13,7 +13,7 @@ class Menu
             ],
             [
                 "title" => "Dashboard",
-                "url"   => "",
+                "url"   => "admin/",
                 "icon"  => "bx bx-home"
             ],
             [
@@ -22,17 +22,17 @@ class Menu
             ],
             [
                 "title" => "Hoya",
-                "url"   => "hoya",
+                "url"   => "admin/hoya",
                 "icon"  => "bx bx-leaf"
             ],
             [
                 "title" => "Asosiasi Serangga",
-                "url"   => "insect-association",
+                "url"   => "admin/insect-association",
                 "icon"  => "bx bx-bug"
             ],
             [
                 "title" => "Hama",
-                "url"   => "pest",
+                "url"   => "admin/pest",
                 "icon"  => "bx bx-spray-can"
             ]
             ];

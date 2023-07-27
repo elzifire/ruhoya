@@ -30,8 +30,8 @@ class PestController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [
-                        "edit"      => url("/pest/edit/".$data->id),
-                        "delete"    => url("/pest/delete/".$data->id),
+                        "edit"      => url("admin/pest/edit/".$data->id),
+                        "delete"    => url("admin/pest/delete/".$data->id),
                     ]);
                 })
                 ->rawColumns(['action'])
@@ -40,7 +40,7 @@ class PestController extends Controller
 
     public function create()
     {
-        $action = url('/pest/store');
+        $action = url('admin/pest/store');
         return view("pages.pest.form", compact("action"));
     }
 
@@ -77,7 +77,7 @@ class PestController extends Controller
     }
     public function edit($id)
     {
-        $action = url('/pest/update/' . $id);
+        $action = url('admin/pest/update/' . $id);
         $data   = Model::findOrFail($id);
 
         return view("pages.pest.form", compact("action", "data"));

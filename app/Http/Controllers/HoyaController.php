@@ -32,8 +32,8 @@ class HoyaController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [
-                        "edit"      => url("/hoya/edit/".$data->id),
-                        "delete"    => url("/hoya/delete/".$data->id),
+                        "edit"      => url("admin/hoya/edit/".$data->id),
+                        "delete"    => url("admin/hoya/delete/".$data->id),
                     ]);
                 })
                 ->rawColumns(['action'])
@@ -42,7 +42,7 @@ class HoyaController extends Controller
 
     public function create()
     {
-        $action = url('/hoya/store');
+        $action = url('admin/hoya/store');
         return view("pages.hoya.form", compact("action"));
     }
 
@@ -124,7 +124,7 @@ class HoyaController extends Controller
     }
     public function edit($id)
     {
-        $action = url('/hoya/update/' . $id);
+        $action = url('admin/hoya/update/' . $id);
         $data   = Model::findOrFail($id);
 
         return view("pages.hoya.form", compact("action", "data"));

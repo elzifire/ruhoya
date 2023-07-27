@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="flex gap-1">
-                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/hoya/create')}}', 'create', 'lg')">
+                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/hoya/create')}}', 'create', 'lg')">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <i class="bx bx-plus label-icon align-middle fs-16 me-2"></i>
@@ -54,7 +54,7 @@
 @push('scripts')
     <script>
         var dt;
-        var API_URL = "{{ url('/hoya/api') }}";
+        var API_URL = "{{ url('admin/hoya/api') }}";
 
         $("[data-menu-url='hoya']").addClass("active");
 

@@ -134,7 +134,7 @@
 
         function loadHoyaSpread() {
             $.ajax({
-                url: "{{url('/')}}",
+                url: "{{url('/admin')}}",
                 type: "GET",
                 data: { mode: "load-hoya" },
                 dataType: "json",
