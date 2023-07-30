@@ -21,7 +21,6 @@
 <link href="{{asset('FE/vendor/fontawesome/css/all.min.css')}}" rel="stylesheet" />
 
 @stack('css')
-
 <style>
     .owl-nav.disabled {
         display: none;

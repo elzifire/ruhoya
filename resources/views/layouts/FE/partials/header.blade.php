@@ -9,16 +9,16 @@
                     <ul class="social-links clearfix">
                         <li><p>Ikuti Kami:</p></li>
                         <li>
-                            <a href="index-2.html"><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{url('/')}}"><i class="fab fa-facebook-f"></i></a>
                         </li>
                         <li>
-                            <a href="index-2.html"><i class="fab fa-twitter"></i></a>
+                            <a href="{{url('/')}}"><i class="fab fa-twitter"></i></a>
                         </li>
                         <li>
-                            <a href="index-2.html"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="{{url('/')}}"><i class="fab fa-linkedin-in"></i></a>
                         </li>
                         <li>
-                            <a href="index-2.html"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="{{url('/')}}"><i class="fab fa-pinterest-p"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -74,9 +74,9 @@
     <div class="auto-container">
         <div class="outer-box">
             <div class="logo-box">
-                <div class="shape" style="background-image: url(assets/images/shape/shape-1.png)"></div>
+                <div class="shape" style="background-image: url({{asset('FE/images/shape/shape-1.png')}})"></div>
                 <figure class="logo">
-                    <a href="index.html"><img src="assets/images/ruhoya-logo.png" alt="" /></a>
+                    <a href="{{url('/')}}"><img src="{{asset('FE/images/ruhoya-logo.png')}}" alt="" /></a>
                 </figure>
             </div>
             <div class="menu-area clearfix">
@@ -89,18 +89,18 @@
                 <nav class="main-menu navbar-expand-md navbar-light">
                     <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="tentang.html">Tentang</a></li>
-                            <li><a href="galeri.html">Galeri</a></li>
-                            <li><a href="identifikasi.html">Identifikasi</a></li>
-                            <li><a href="database.html">Database Hoya</a></li>
-                            <li><a href="tim-ahli.html">Tim Ahli</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
+                            <li><a href="{{url('/tentang')}}">Tentang</a></li>
+                            <li><a href="{{url('/galeri')}}">Galeri</a></li>
+                            <li><a href="{{url('/identifikasi')}}">Identifikasi</a></li>
+                            <li><a href="{{url('/database')}}">Database Hoya</a></li>
+                            <li><a href="{{url('/tim-ahli')}}">Tim Ahli</a></li>
                         </ul>
                     </div>
                 </nav>
             </div>
             <div class="nav-right">
-                <div class="btn-box"><a href="index-2.html" class="theme-btn btn-one">Login</a></div>
+                <div class="btn-box"><a href="{{url('/login')}}" class="theme-btn btn-one">Login</a></div>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@
         <div class="outer-box">
             <div class="logo-box">
                 <figure class="logo">
-                    <a href="index-2.html"><img src="assets/images/ruhoya-logo.png" alt="" /></a>
+                    <a href="{{url('/')}}"><img src="{{asset('FE/images/ruhoya-logo.png')}}" alt="" /></a>
                 </figure>
             </div>
             <div class="menu-area clearfix">
@@ -121,7 +121,7 @@
                 </nav>
             </div>
             <div class="nav-right">
-                <div class="btn-box"><a href="index-2.html" class="theme-btn btn-one">Login</a></div>
+                <div class="btn-box"><a href="{{url('/login')}}" class="theme-btn btn-one">Login</a></div>
             </div>
         </div>
     </div>
@@ -136,7 +136,7 @@
     
     <nav class="menu-box">
         <div class="nav-logo w-50">
-            <a href="index.html"><img src="assets/images/ruhoya-logo.png" alt="" title="" /></a>
+            <a href="{{url('/')}}"><img src="{{asset('FE/images/ruhoya-logo.png')}}" alt="" title="" /></a>
         </div>
         <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
         <div class="contact-info">
@@ -150,19 +150,19 @@
         <div class="social-links">
             <ul class="clearfix">
                 <li>
-                    <a href="index-2.html"><span class="fab fa-twitter"></span></a>
+                    <a href="{{url('/')}}"><span class="fab fa-twitter"></span></a>
                 </li>
                 <li>
-                    <a href="index-2.html"><span class="fab fa-facebook-square"></span></a>
+                    <a href="{{url('/')}}"><span class="fab fa-facebook-square"></span></a>
                 </li>
                 <li>
-                    <a href="index-2.html"><span class="fab fa-pinterest-p"></span></a>
+                    <a href="{{url('/')}}"><span class="fab fa-pinterest-p"></span></a>
                 </li>
                 <li>
-                    <a href="index-2.html"><span class="fab fa-instagram"></span></a>
+                    <a href="{{url('/')}}"><span class="fab fa-instagram"></span></a>
                 </li>
                 <li>
-                    <a href="index-2.html"><span class="fab fa-youtube"></span></a>
+                    <a href="{{url('/')}}"><span class="fab fa-youtube"></span></a>
                 </li>
             </ul>
         </div>

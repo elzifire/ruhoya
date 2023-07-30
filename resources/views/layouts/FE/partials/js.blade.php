@@ -13,3 +13,5 @@
 
 <!-- main-js -->
 <script src="{{asset('FE/js/script.js')}}"></script>
+
+@stack('script')

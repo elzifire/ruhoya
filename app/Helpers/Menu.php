@@ -34,7 +34,21 @@ class Menu
                 "title" => "Hama",
                 "url"   => "admin/pest",
                 "icon"  => "bx bx-spray-can"
+            ],
+            [
+                "title" => "MASTER DATA",
+                "url"   => null,
+            ],
+            [
+                "title" => "Slider",
+                "url"   => "admin/slider",
+                "icon"  => "bx bx-image"
+            ],
+            [
+                "title" => "Tim Ahli",
+                "url"   => "admin/team",
+                "icon"  => "bx bx-user"
             ]
-            ];
+        ];
     }
 }

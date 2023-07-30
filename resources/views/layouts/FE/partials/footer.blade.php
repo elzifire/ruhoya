@@ -49,13 +49,21 @@
                                                 </li>
                                             </ul>
                                             <div class="d-flex align-items-center flex-wrap" style="gap: 1.25rem">
-                                                <img src="{{asset('FE/images/collaborator/BRIN.png')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/uika.png')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/Logo_IPB.png')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/Logo_Universitas_Jambi_UNJA.png')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/Logo_Universitas_Tadulako_Palu.png')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/Logo_EFForTS_cmyk.jpg')}}" style="height: 50px" />
-                                                <img src="{{asset('FE/images/collaborator/Logo_GOE.png')}}" style="height: 50px" />
+                                                <div class="d-flex align-items-center flex-wrap" style="gap: 1.25rem">
+                                                    <img src="{{asset('FE/images/collaborator/BRIN.png')}}" style="height: 50px" />
+                                                    <img src="{{asset('FE/images/collaborator/uika.png')}}" style="height: 50px" />
+                                                    <img src="{{asset('FE/images/collaborator/Logo_IPB.png')}}" style="height: 50px" />
+                                                    <img
+                                                    src="{{asset('FE/images/collaborator/Logo_Universitas_Jambi_UNJA.png')}}"
+                                                    style="height: 50px"
+                                                    />
+                                                    <img
+                                                    src="{{asset('FE/images/collaborator/Logo_Universitas_Tadulako_Palu.png')}}"
+                                                    style="height: 50px"
+                                                    />
+                                                    <img src="{{asset('FE/images/collaborator/Logo_EFForTS_cmyk.jpg')}}" style="height: 50px" />
+                                                    <img src="{{asset('FE/images/collaborator/Logo_GOE.png')}}" style="height: 50px" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -83,20 +91,17 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom pt_30 pb_30">
-            <div class="auto-container">
-                <div class="bottom-inner clearfix">
-                    <div class="copyright pull-left">
-                        <p class="fs_15"><a href="{{url('/')}}">RUHOYA</a> &copy; 2023 All Right Reserved.</p>
+                    <div class="footer-bottom pt_30 pb_30">
+                        <div class="auto-container">
+                            <div class="bottom-inner clearfix">
+                                <div class="copyright pull-left">
+                                    <p class="fs_15"><a href="{{url('/')}}">RUHOYA</a> &copy; 2023 All Right Reserved.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- main-footer end -->
+                </footer>
+                <!-- main-footer end -->
