@@ -32,7 +32,7 @@
                                     <div class="text-center mb-5">
                                         <a href="index.html">
                                             <span class="logo-lg">
-                                                <img src="{{asset('BE/images/logo-dark.png')}}" alt="" height="21">
+                                                <img src="{{asset('FE/images/ruhoya-logo.png')}}" alt="" height="50">
                                             </span>
                                         </a>
                                     </div>
