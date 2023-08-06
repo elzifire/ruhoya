@@ -39,6 +39,7 @@ Route::middleware("auth")->group(function() {
         Route::get("/hoya/edit/{id}", "BE\HoyaController@edit");
         Route::post("/hoya/update/{id}", "BE\HoyaController@update");
         Route::get("/hoya/delete/{id}", "BE\HoyaController@destroy");
+        Route::get("/hoya/export", "BE\HoyaController@export");
     
         Route::get("/insect-association", "BE\InsectAssociationController@index");
         Route::get("/insect-association/api", "BE\InsectAssociationController@api");

@@ -17,6 +17,16 @@
                                 </div>
                             </div>
                         </button>
+                        <a href="{{url('/admin/hoya/export')}}" class="btn btn-info btn-label" target="_blank">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bx bx-export label-icon align-middle fs-16 me-2"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    Export
+                                </div>
+                            </div>
+                        </a>
                     </div>
                     <a href="javascript:void(0);" class="btn btn-success btn-label" data-refresh-btn>
                         <div class="d-flex">

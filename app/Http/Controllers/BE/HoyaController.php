@@ -15,6 +15,9 @@ use App\Models\Hoya as Model;
 use App\Models\HoyaImage;
 use App\Models\HoyaSpread;
 
+use App\Exports\HoyaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use DB;
 use DataTables;
 
@@ -258,5 +261,11 @@ class HoyaController extends Controller
             $response->message      = $e->getMessage();
             return response()->json($response, $response->status_code);
         }
+    }
+
+    public function export()
+    {
+        $t = date('dmyHis');
+        return Excel::download(new HoyaExport, "hoya-{$t}.xlsx");
     }
 }
