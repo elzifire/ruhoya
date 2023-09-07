@@ -17,6 +17,16 @@
                                 </div>
                             </div>
                         </button>
+                        <button type="button" class="btn btn-success btn-label" onclick="openForm('{{url('/admin/hoya/import')}}', 'import')">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="bx bx-import label-icon align-middle fs-16 me-2"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    Import
+                                </div>
+                            </div>
+                        </button>
                         <a href="{{url('/admin/hoya/export')}}" class="btn btn-info btn-label" target="_blank">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">

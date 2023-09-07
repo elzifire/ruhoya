@@ -16,6 +16,7 @@ use App\Models\HoyaImage;
 use App\Models\HoyaSpread;
 
 use App\Exports\HoyaExport;
+use App\Imports\HoyaImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use DB;
@@ -267,5 +268,25 @@ class HoyaController extends Controller
     {
         $t = date('dmyHis');
         return Excel::download(new HoyaExport, "hoya-{$t}.xlsx");
+    }
+
+    public function import()
+    {
+        $action = url('/admin/hoya/upload');
+        return view("pages.be.hoya.import", compact("action"));
+    }
+
+    public function upload(Request $request)
+    {
+        $response = new ResponseModel(HttpStatus::SUCCESS, HttpMessage::SUCCESS_IMPORT);
+
+        try {
+            Excel::import(new HoyaImport, $request->file("file"));
+            return response()->json($response);
+        } catch (Exception $e) {
+            $response->status_code  = HttpStatus::INTERNAL_SERVER_ERROR;
+            $response->message      = $e->getMessage();
+            return response()->json($response, $response->status_code);
+        }
     }
 }

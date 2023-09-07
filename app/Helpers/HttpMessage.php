@@ -9,6 +9,7 @@ class HTTPMessage
     const SUCCESS_UPDATE = "Berhasil mengupdate data";
     const SUCCESS_DELETE = "Berhasil menghapus data";
     const SUCCESS_SYNC   = "Berhasil menyinkron data";
+    const SUCCESS_IMPORT = "Berhasil mengimport data";
 
     const FAILED_READ = "Gagal membaca data";
     const FAILED_FIND = "Data tidak ditemukan";

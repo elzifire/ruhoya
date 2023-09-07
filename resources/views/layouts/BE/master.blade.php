@@ -125,6 +125,7 @@
             
             var modalTitle  = title[type] || type;
             
+            $(".modal-dialog").removeClass(`modal-lg`);
             $(".modal-dialog").removeClass(`modal-xl`);
             if (size != "default") $("[data-modal] > .modal-dialog").addClass(`modal-${size}`)
 
