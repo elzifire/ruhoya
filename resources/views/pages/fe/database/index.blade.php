@@ -38,7 +38,11 @@
                                 @forelse ($data as $index => $hoya)
                                     <tr>
                                         <td class="px-2" style="max-width: 40px">
-                                            <img src="{{url('uploads/' . $hoya->hoyaImages[0]->image)}}" class="img-fluid" />
+                                            @if (isset($hoya->hoyaImages[0]))
+                                                <img src="{{url('uploads/' . $hoya->hoyaImages[0]->image)}}" class="img-fluid" />
+                                            @else
+                                                <img src="{{asset("FE/images/not_found.jpg")}}" class="img-fluid" />
+                                            @endif
                                         </td>
                                         <td>
                                             <a href="{{url('database/' . $hoya->id)}}">{{$hoya->name}}</a>

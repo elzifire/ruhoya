@@ -1,7 +1,7 @@
 @extends("layouts.FE.master")
 @section("title", $data->name)
 @section("content")
-<section class="page-title p_relative pt_150 pb_180 centred" style="background-image: url({{url('uploads/' . $data->hoyaImages[0]->image)}}); background-repeat: no-repeat; background-size: cover;">
+<section class="page-title p_relative pt_150 pb_180 centred" style="background-image: url({{isset($hoya->hoyaImages[0]) ? url('uploads/' . $data->hoyaImages[0]->image) : asset("FE/images/not_found.jpg")}}); background-repeat: no-repeat; background-size: cover;">
     <div class="auto-container">
         <div class="content-box">
             <h1 class="d_block fs_70 lh_70 mb_20 color_white">{{$data->name}}</h1>

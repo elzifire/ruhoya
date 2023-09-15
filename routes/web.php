@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get("/clear", function() {
+    $exitCode1  = Artisan::call('config:cache');
+    $exitCode2  = Artisan::call('route:clear');
+    $exitCode3  = Artisan::call('view:clear');
+});
 
 Route::get("/", "FE\HomeController@index");
 Route::get("/tentang", "FE\AboutController@index");

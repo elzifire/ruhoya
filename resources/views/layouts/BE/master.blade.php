@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>@yield('title') | {{env("APP_NAME")}}</title>
+    <title>@yield('title') | {{config("app.name")}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -46,7 +46,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            {{date("Y")}} © {{env("APP_NAME")}}.
+                            {{date("Y")}} © {{config("app.name")}}.
                         </div>
                     </div>
                 </div>
