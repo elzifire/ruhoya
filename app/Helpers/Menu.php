@@ -40,6 +40,11 @@ class Menu
                 "url"   => null,
             ],
             [
+                "title" => "Enumeration",
+                "url"   => "admin/enumeration",
+                "icon"  => "bx bx-collection"
+            ],
+            [
                 "title" => "Slider",
                 "url"   => "admin/slider",
                 "icon"  => "bx bx-image"

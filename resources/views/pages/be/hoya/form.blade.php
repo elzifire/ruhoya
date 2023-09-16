@@ -49,39 +49,84 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="stem" class="form-label">Batang</label>
-                <input type="text" class="form-control" name="stem" value="{{isset($data) ? $data['stem'] : ''}}">
+                <select name="stem" id="stem" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Batang"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['stem'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="leaves" class="form-label">Daun</label>
-                <input type="text" class="form-control" name="leaves" value="{{isset($data) ? $data['leaves'] : ''}}">
+                <select name="leaves" id="leaves" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Daun"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['leaves'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flowers" class="form-label">Bentuk Bunga</label>
-                <input type="text" class="form-control" name="flowers" value="{{isset($data) ? $data['flowers'] : ''}}">
+                <select name="flowers" id="flowers" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Bentuk_Bunga"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['flowers'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_buds" class="form-label">Kuncup Bunga</label>
-                <input type="text" class="form-control" name="flower_buds" value="{{isset($data) ? $data['flower_buds'] : ''}}">
+                <select name="flower_buds" id="flower_buds" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Kuncup_Bunga"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_buds'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_size" class="form-label">Ukuran Bunga</label>
-                <input type="text" class="form-control" name="flower_size" value="{{isset($data) ? $data['flower_size'] : ''}}">
+                <select name="flower_size" id="flower_size" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Ukuran_Bunga"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_size'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_colors" class="form-label">Warna Bunga</label>
-                <input type="text" class="form-control" name="flower_colors" value="{{isset($data) ? $data['flower_colors'] : ''}}">
+                <select name="flower_colors" id="flower_colors" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Warna_Bunga"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_colors'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="roots" class="form-label">Akar</label>
-                <input type="text" class="form-control" name="roots" value="{{isset($data) ? $data['roots'] : ''}}">
+                <select name="roots" id="roots" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Akar"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['roots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="shoots" class="form-label">Tunas</label>
-                <input type="text" class="form-control" name="shoots" value="{{isset($data) ? $data['shoots'] : ''}}">
+                <select name="shoots" id="shoots" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Tunas"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['shoots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-sm-12 mb-3">
                 <label for="reproduction_system" class="form-label">Sistem Reproduksi</label>
-                <input type="text" class="form-control" name="reproduction_system" value="{{isset($data) ? $data['reproduction_system'] : ''}}">
+                <select name="reproduction_system" id="reproduction_system" class="form-select" required>
+                    <option selected>-- Pilih --</option>
+                    @foreach ($deps["Morfologi_Sistem_Reproduksi"] as $item)
+                        <option value="{{$item->value}}" {{(isset($data) && $data['reproduction_system'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>

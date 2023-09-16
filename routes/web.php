@@ -64,6 +64,14 @@ Route::middleware("auth")->group(function() {
         Route::post("/pest/update/{id}", "BE\PestController@update");
         Route::get("/pest/delete/{id}", "BE\PestController@destroy");
     
+        Route::get("/enumeration", "BE\EnumerationController@index");
+        Route::get("/enumeration/api", "BE\EnumerationController@api");
+        Route::get("/enumeration/create", "BE\EnumerationController@create");
+        Route::post("/enumeration/store", "BE\EnumerationController@store");
+        Route::get("/enumeration/edit/{id}", "BE\EnumerationController@edit");
+        Route::post("/enumeration/update/{id}", "BE\EnumerationController@update");
+        Route::get("/enumeration/delete/{id}", "BE\EnumerationController@destroy");
+    
         Route::get("/slider", "BE\SliderController@index");
         Route::get("/slider/api", "BE\SliderController@api");
         Route::get("/slider/create", "BE\SliderController@create");

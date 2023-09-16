@@ -14,6 +14,7 @@ use App\Models\Base\ResponseModel;
 use App\Models\Hoya as Model;
 use App\Models\HoyaImage;
 use App\Models\HoyaSpread;
+use App\Models\Enumeration;
 
 use App\Exports\HoyaExport;
 use App\Imports\HoyaImport;
@@ -49,7 +50,12 @@ class HoyaController extends Controller
     public function create()
     {
         $action = url('admin/hoya/store');
-        return view("pages.be.hoya.form", compact("action"));
+        $deps   = [];
+
+        foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
+            $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
+
+        return view("pages.be.hoya.form", compact("action", "deps"));
     }
 
     public function store(Request $request)
@@ -132,8 +138,12 @@ class HoyaController extends Controller
     {
         $action = url('admin/hoya/update/' . $id);
         $data   = Model::findOrFail($id);
+        $deps   = [];
 
-        return view("pages.be.hoya.form", compact("action", "data"));
+        foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
+            $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
+
+        return view("pages.be.hoya.form", compact("action", "data", "deps"));
     }
 
     public function update(Request $request, $id)

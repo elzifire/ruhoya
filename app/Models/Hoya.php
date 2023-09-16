@@ -10,6 +10,18 @@ class Hoya extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const ENUM_MORFOLOGY_KEYS = [
+        "Morfologi_Batang",
+        "Morfologi_Daun",
+        "Morfologi_Bentuk_Bunga",
+        "Morfologi_Kuncup_Bunga",
+        "Morfologi_Ukuran_Bunga",
+        "Morfologi_Warna_Bunga",
+        "Morfologi_Akar",
+        "Morfologi_Tunas",
+        "Morfologi_Sistem_Reproduksi",
+    ];
+
     protected $fillable = [
         "name",
         "local_name",
