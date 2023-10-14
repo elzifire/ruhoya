@@ -136,46 +136,6 @@
     </section>
     <!-- cta-section end -->
 
-    <!-- project-section -->
-    <section class="project-section p_relative pt_140 pb_130">
-        <div class="auto-container">
-            <div class="">
-                <div class="upper-box mb_45 clearfix">
-                    <div class="sec-title pull-left">
-                        <span class="sub-title">Galeri</span>
-                        <h2>Pesona Hoya dalam Lensa</h2>
-                    </div>
-                </div>
-                <div class="items-container row clearfix">
-                    @foreach (\App\Models\Hoya::all() as $hoya)    
-                    @foreach ($hoya->hoyaImages as $hoyaImage)
-                        <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all product urban maintanance">
-                            <div class="project-block-one">
-                                <div class="inner-box p_relative d_block centred mb_30">
-                                    <figure class="image-box p_relative d_block b_radius_5">
-                                        <img src="{{url('uploads/' . $hoyaImage->image)}}" alt="" />
-                                    </figure>
-                                    <div class="content-box p_absolute d_flex tran_5">
-                                        <div class="inner p_relative">
-                                            <div class="icon-box p_relative d_iblock fs_35 mb_20 b_radius_10 bg_white tran_5">
-                                                <i class="fas fa-seedling"></i>
-                                            </div>
-                                            <h3 class="fs_22 color_white fw_medium mb_11 d_block tran_5">
-                                                <a href="project-details.html" class="d_iblock color_white">{{$hoya->name}}</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- project-section end -->
-
     <!-- funfact-section -->
     <section
         class="funfact-section p_relative pt_140 pb_140"
@@ -244,8 +204,48 @@
     </section>
     <!-- funfact-section end -->
 
+    <!-- project-section -->
+    <section class="project-section p_relative pt_140 pb_130">
+        <div class="auto-container">
+            <div class="">
+                <div class="upper-box mb_45 clearfix">
+                    <div class="sec-title pull-left">
+                        <span class="sub-title">Galeri</span>
+                        <h2>Pesona Hoya dalam Lensa</h2>
+                    </div>
+                </div>
+                <div class="items-container row clearfix">
+                    @foreach (\App\Models\Hoya::all() as $hoya)    
+                    @foreach ($hoya->hoyaImages as $hoyaImage)
+                        <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all product urban maintanance">
+                            <div class="project-block-one">
+                                <div class="inner-box p_relative d_block centred mb_30">
+                                    <figure class="image-box p_relative d_block b_radius_5">
+                                        <img src="{{url('uploads/' . $hoyaImage->image)}}" alt="" />
+                                    </figure>
+                                    <div class="content-box p_absolute d_flex tran_5">
+                                        <div class="inner p_relative">
+                                            <div class="icon-box p_relative d_iblock fs_35 mb_20 b_radius_10 bg_white tran_5">
+                                                <i class="fas fa-seedling"></i>
+                                            </div>
+                                            <h3 class="fs_22 color_white fw_medium mb_11 d_block tran_5">
+                                                <a href="project-details.html" class="d_iblock color_white">{{$hoya->name}}</a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- project-section end -->
+
     <!-- team-section -->
-    <section class="team-section p_relative sec-pad">
+    {{-- <section class="team-section p_relative sec-pad">
         <div class="auto-container">
             <div class="sec-title centred mb_45">
                 <span class="sub-title">Ahli</span>
@@ -271,7 +271,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- team-section end -->
 
     @push("script")
