@@ -213,7 +213,10 @@
                                 <td class="align-middle">
                                     <input type="text" class="form-control" name="hoya_spreads[{{$index}}][longitude]" value="{{$hoyaSpread->longitude}}" required>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle" style="white-space: nowrap;">
+                                    <button type="button" class="btn btn-primary btn-sm" data-pick-from-map="{{$index}}">
+                                        <i class="bx bx-map align-middle"></i> Pilih Lewat Peta
+                                    </button>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="$(`[data-spread-inputs] > [data-index='{{$index}}']`).remove()">
                                         <i class="bx bx-trash align-middle"></i>
                                     </button>
@@ -231,7 +234,11 @@
                             <td class="align-middle">
                                 <input type="text" class="form-control" name="hoya_spreads[0][longitude]">
                             </td>
-                            <td class="align-middle"></td>
+                            <td class="align-middle" style="white-space: nowrap;">
+                                <button type="button" class="btn btn-primary btn-sm" data-pick-from-map="0">
+                                    <i class="bx bx-map align-middle"></i> Pilih Lewat Peta
+                                </button>
+                            </td>
                         </tr>
                     @endif
                 </tbody>

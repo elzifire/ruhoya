@@ -35,7 +35,7 @@ class HoyaController extends Controller
     {
         $model = Model::orderBy("id", "DESC");
 
-        return DataTables::of($model->get())
+        return DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [
@@ -53,7 +53,7 @@ class HoyaController extends Controller
         $deps   = [];
 
         foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
-            $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
+            $deps[$enum] = Enumeration::where("key", $enum)->get();
 
         return view("pages.be.hoya.form", compact("action", "deps"));
     }

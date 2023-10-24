@@ -71,12 +71,48 @@
 </div>
 @endsection
 
+@push('css')
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+     <style>
+        #pick-map { height: 512px; }
+     </style>
+@endpush
 @push('scripts')
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script>
         var dt;
+        var pickedindex = null;
+        var pickedLatLng = null;
+
+        var mapModal = new bootstrap.Modal(document.querySelector("[data-map-modal]"), {});
         var API_URL = "{{ url('admin/hoya/api') }}";
 
         $("[data-menu-url='hoya']").addClass("active");
+
+        var markers = L.markerClusterGroup();
+        var marker = L.marker([0, 0]);
+
+        var map = L.map('pick-map').setView([-2.546, 127.768], 5);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 10,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
+        .addTo(map);
+        marker.addTo(map);
+
+        map.on("click", function(event) {
+            pickedLatLng = event.latlng;
+            marker.setLatLng(event.latlng)
+        })
+        
+        $("[data-map-modal]").on('shown.bs.modal', function(event) {
+            setTimeout(function() {
+                map.invalidateSize();
+            }, 1);
+        });
 
         $(document).ready(function() {
             dt = $("#datatable").DataTable({
@@ -156,6 +192,7 @@
                 tdLatitude.classList.add("align-middle");
                 tdLongitude.classList.add("align-middle");
                 tdAction.classList.add("align-middle");
+                tdAction.style.whiteSpace = "nowrap"
 
                 var inputDescription = document.createElement("input");
                 inputDescription.type = "text";
@@ -178,14 +215,45 @@
                 actionBtn.innerHTML = `<i class="bx bx-trash align-middle"></i>`;
                 actionBtn.addEventListener("click", function() { $(`[data-spread-inputs] > [data-index="${count}"]`).remove(); })
 
+                var pickFromMap = document.createElement("button");
+                pickFromMap.type = "button";
+                pickFromMap.classList.add("btn", "btn-primary", "btn-sm");
+                pickFromMap.innerHTML = `<i class="bx bx-map align-middle"></i> Pilih Lewat Peta`;
+                pickFromMap.classList.add("me-1");
+                pickFromMap.dataset.pickFromMap = count;
+
                 tdDescription.append(inputDescription);
                 tdLatitude.append(inputLatitude);
                 tdLongitude.append(inputLongitude);
-                tdAction.append(actionBtn);
+                tdAction.append(pickFromMap, actionBtn);
 
                 tr.append(tdDescription, tdLatitude, tdLongitude, tdAction);
                 $("[data-spread-inputs]").append(tr);
-             });
+            });
+
+            $(document).on("click", "[data-pick-from-map]", function() {
+                pickedindex = this.dataset.pickFromMap;
+                var lat = $(`[name="hoya_spreads[${pickedindex}][latitude]"]`).val();
+                var lng = $(`[name="hoya_spreads[${pickedindex}][longitude]"]`).val();
+
+                if (lat && lng) map.setView([lat, lng], 5);
+
+                marker.setLatLng({ lat: lat, lng: lng })
+                mapModal.show();
+            });
+
+            $(document).on("click", "[data-picked-btn]", function() {
+                if (pickedLatLng === null && pickedindex === null) return;
+
+                $(`[name="hoya_spreads[${pickedindex}][latitude]"]`).val(pickedLatLng?.lat);
+                $(`[name="hoya_spreads[${pickedindex}][longitude]"]`).val(pickedLatLng?.lng);
+
+                mapModal.hide();
+
+                pickedLatLng = null;
+                pickedindex = null;
+                marker.setLatLng({ lat: 0, lng: 0 });
+            })
 
             $(document).on("submit", "form", function() {
                 $.ajax({

@@ -66,6 +66,23 @@
         </div>
     </div>
 
+    <div class="modal fade" id="mapStaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="mapStaticBackdropLabel" aria-hidden="true" data-map-modal>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pilih Daerah Sebaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="pick-map"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-picked-btn>Pilih</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
         <i class="ri-arrow-up-line"></i>
     </button>
@@ -125,8 +142,8 @@
             
             var modalTitle  = title[type] || type;
             
-            $(".modal-dialog").removeClass(`modal-lg`);
-            $(".modal-dialog").removeClass(`modal-xl`);
+            $("[data-modal] .modal-dialog").removeClass(`modal-lg`);
+            $("[data-modal] .modal-dialog").removeClass(`modal-xl`);
             if (size != "default") $("[data-modal] > .modal-dialog").addClass(`modal-${size}`)
 
             $.ajax({
