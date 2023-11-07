@@ -42,15 +42,20 @@
     </div>
     <div class="mb-3">
         <label for="benefit" class="form-label">Manfaat</label>
-        <input type="text" class="form-control" name="benefit" value="{{isset($data) ? $data['benefit'] : ''}}" required>
+        <select class="form-control" name="benefit[]" id="benefit" multiple="multiple" required>
+            @php $selectedBenefits = isset($data) ? explode(",", $data["benefit"]) : []; @endphp
+            @foreach ($benefits as $item)
+                <option value="{{$item->value}}" {{(isset($data) && in_array($item->value, $selectedBenefits)) ? "selected" : ""}}>{{$item->value}}</option>
+            @endforeach
+        </select>
     </div>
     <div class="mb-3">
         <h4 class="border-bottom border-4 border-primary pb-2 mb-4 mt-4">Morfologi</h4>
         <div class="row">
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="stem" class="form-label">Batang</label>
-                <select name="stem" id="stem" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="stem" id="stem" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Batang"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['stem'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -58,8 +63,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="leaves" class="form-label">Daun</label>
-                <select name="leaves" id="leaves" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="leaves" id="leaves" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Daun"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['leaves'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -67,8 +72,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flowers" class="form-label">Bentuk Bunga</label>
-                <select name="flowers" id="flowers" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="flowers" id="flowers" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Bentuk_Bunga"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['flowers'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -76,8 +81,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_buds" class="form-label">Kuncup Bunga</label>
-                <select name="flower_buds" id="flower_buds" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="flower_buds" id="flower_buds" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Kuncup_Bunga"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['flower_buds'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -85,8 +90,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_size" class="form-label">Ukuran Bunga</label>
-                <select name="flower_size" id="flower_size" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="flower_size" id="flower_size" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Ukuran_Bunga"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['flower_size'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -94,8 +99,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="flower_colors" class="form-label">Warna Bunga</label>
-                <select name="flower_colors" id="flower_colors" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="flower_colors" id="flower_colors" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Warna_Bunga"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['flower_colors'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -103,8 +108,8 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="roots" class="form-label">Akar</label>
-                <select name="roots" id="roots" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="roots" id="roots" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Akar"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['roots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
@@ -112,19 +117,10 @@
             </div>
             <div class="col-md-6 col-sm-12 mb-3">
                 <label for="shoots" class="form-label">Tunas</label>
-                <select name="shoots" id="shoots" class="form-select" required>
-                    <option selected>-- Pilih --</option>
+                <select name="shoots" id="shoots" class="form-select">
+                    <option value="" selected>-- Pilih --</option>
                     @foreach ($deps["Morfologi_Tunas"] as $item)
                         <option value="{{$item->value}}" {{(isset($data) && $data['shoots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-sm-12 mb-3">
-                <label for="reproduction_system" class="form-label">Sistem Reproduksi</label>
-                <select name="reproduction_system" id="reproduction_system" class="form-select" required>
-                    <option selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Sistem_Reproduksi"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['reproduction_system'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
                     @endforeach
                 </select>
             </div>
@@ -143,6 +139,7 @@
                     <tr>
                         <th style="white-space: nowrap;">File</th>
                         <th style="white-space: nowrap;">Deskripsi</th>
+                        <th style="white-space: nowrap;">Fotografer</th>
                         <th style="white-space: nowrap;"></th>
                     </tr>
                 </thead>
@@ -155,7 +152,10 @@
                                     <input type="file" class="form-control" name="hoya_images[{{$index}}][file]" accept="image/*">
                                 </td>
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][description]" value="{{$hoyaImage->description}}">
+                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][description]" value="{{$hoyaImage->description}}" required>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][photographer]" value="{{$hoyaImage->photographer}}" required>
                                 </td>
                                 <td class="d-flex gap-1 align-middle">
                                     <a href="{{url('uploads/' . $hoyaImage->image)}}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
@@ -174,6 +174,9 @@
                             </td>
                             <td class="align-middle">
                                 <input type="text" class="form-control" name="hoya_images[0][description]" required>
+                            </td>
+                            <td class="align-middle">
+                                <input type="text" class="form-control" name="hoya_images[0][photographer]" required>
                             </td>
                             <td class="align-middle"></td>
                         </tr>
@@ -249,3 +252,13 @@
         <button type="submit" class="btn btn-primary">Kirim</button>
     </div>
 </form>
+<script defer>
+    $(document).ready(function() {
+        $("#benefit").select2({
+            tags: true,
+            theme: 'classic',
+            tokenSeparators: [','],
+            dropdownParent: $('[data-modal] .modal-content')
+        })
+    })
+</script>

@@ -37,13 +37,16 @@ class HoyaController extends Controller
 
         return DataTables::of($model)
                 ->addIndexColumn()
+                ->addColumn('name', function($data) {
+                    return "Hoya <i>{$data->name}</i>, <b>{$data->author}</b>";
+                })
                 ->addColumn('action', function($data) {
                     return view("components.action", [
                         "edit"      => url("admin/hoya/edit/".$data->id),
                         "delete"    => url("admin/hoya/delete/".$data->id),
                     ]);
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['name', 'action'])
                 ->make(true);
     }
 
@@ -51,11 +54,12 @@ class HoyaController extends Controller
     {
         $action = url('admin/hoya/store');
         $deps   = [];
+        $benefits   = Enumeration::where("key", "Benefit")->get();
 
         foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
             $deps[$enum] = Enumeration::where("key", $enum)->get();
 
-        return view("pages.be.hoya.form", compact("action", "deps"));
+        return view("pages.be.hoya.form", compact("action", "deps", "benefits"));
     }
 
     public function store(Request $request)
@@ -76,10 +80,14 @@ class HoyaController extends Controller
         try {
             $hoyaImages     = $payload["hoya_images"];
             $hoyaSpreads    = $payload["hoya_spreads"];
+            $payload["benefit"] = implode(",", $payload["benefit"]);
+
             unset($payload["hoya_images"], $payload["hoya_spreads"]);
 
             $data = Model::create($payload);
             $hoyaId = $data->id;
+
+            $this->checkForBenefitEnumeration($request->benefit);
 
             $response->data = $data;
             $response->data->hoya_images    = [];
@@ -99,7 +107,8 @@ class HoyaController extends Controller
                 HoyaImage::create([
                     "hoya_id"       => $hoyaId,
                     "image"         => $hoyaImage["file"]->store("hoya"),
-                    "description"   => $hoyaImage["description"]
+                    "description"   => $hoyaImage["description"],
+                    "photographer"  => $hoyaImage["photographer"]
                 ]);
             }
 
@@ -139,11 +148,12 @@ class HoyaController extends Controller
         $action = url('admin/hoya/update/' . $id);
         $data   = Model::findOrFail($id);
         $deps   = [];
+        $benefits   = Enumeration::where("key", "Benefit")->get();
 
         foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
             $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
 
-        return view("pages.be.hoya.form", compact("action", "data", "deps"));
+        return view("pages.be.hoya.form", compact("action", "data", "deps", "benefits"));
     }
 
     public function update(Request $request, $id)
@@ -164,11 +174,15 @@ class HoyaController extends Controller
         try {
             $hoyaImages     = $payload["hoya_images"];
             $hoyaSpreads    = $payload["hoya_spreads"];
+            $payload["benefit"] = implode(",", $payload["benefit"]);
+
             unset($payload["hoya_images"], $payload["hoya_spreads"]);
 
             $data   = Model::findOrFail($id);
             $data->update($payload);
             $hoyaId = $data->id;
+
+            $this->checkForBenefitEnumeration($request->benefit);
 
             $response->data = $data;
             $response->data->hoya_images    = [];
@@ -190,7 +204,8 @@ class HoyaController extends Controller
 
                 $payload = [
                     "hoya_id"       => $hoyaId,
-                    "description"   => $hoyaImage["description"]
+                    "description"   => $hoyaImage["description"],
+                    "photographer"  => $hoyaImage["photographer"]
                 ];
 
                 if (isset($hoyaImage["file"]))
@@ -203,7 +218,7 @@ class HoyaController extends Controller
                     $hoyaImage = HoyaImage::create($payload);
                 }
 
-                array_push($hoyaImageIds, $hoyaImage["id"]);
+                array_push($hoyaImageIds, $hoyaImage->id);
             }
 
             foreach ($hoyaSpreads as $key => $hoyaSpread) {
@@ -297,6 +312,18 @@ class HoyaController extends Controller
             $response->status_code  = HttpStatus::INTERNAL_SERVER_ERROR;
             $response->message      = $e->getMessage();
             return response()->json($response, $response->status_code);
+        }
+    }
+
+    private function checkForBenefitEnumeration($benefits)
+    {
+        foreach ($benefits as $index => $benefit) {
+            $count = Enumeration::where("value", $benefit)->count();
+            if ($count < 1) Enumeration::insert([
+                "group" => "Benefit",
+                "key"   => "Benefit",
+                "value" => $benefit
+            ]);
         }
     }
 }

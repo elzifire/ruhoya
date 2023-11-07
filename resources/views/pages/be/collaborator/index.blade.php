@@ -1,5 +1,5 @@
-@extends("layouts.BE.master", ["breadcrumb" => ["Home", "Tim Ahli"]])
-@section("title", "Tim Ahli")
+@extends("layouts.BE.master", ["breadcrumb" => ["Home", "Kolaborator"]])
+@section("title", "Kolaborator")
 @section("content")
 <div class="row">
     <div class="col-lg-12">
@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="flex gap-1">
-                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/team/create')}}', 'create', 'lg')">
+                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/collaborator/create')}}', 'create', 'lg')">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <i class="bx bx-plus label-icon align-middle fs-16 me-2"></i>
@@ -37,7 +37,9 @@
                             <tr>
                                 <th>Gambar</th>
                                 <th>Nama</th>
-                                <th>Gelar</th>
+                                <th>Instansi</th>
+                                <th>Kontribusi</th>
+                                <th>Urutan</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -53,7 +55,7 @@
 @push('scripts')
     <script>
         var dt;
-        var API_URL = "{{ url('/admin/team/api') }}";
+        var API_URL = "{{ url('/admin/collaborator/api') }}";
 
         $("[data-menu-url='pest']").addClass("active");
 
@@ -68,7 +70,9 @@
                 columns: [
                     {data: 'image', name: 'image'},
                     {data: 'name', name: 'name'},
-                    {data: 'title', name: 'title'},
+                    {data: 'institute', name: 'institute'},
+                    {data: 'contribution', name: 'contribution'},
+                    {data: 'sequence', name: 'sequence'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });

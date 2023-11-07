@@ -28,7 +28,7 @@ class SliderController extends Controller
     {
         $model = Model::orderBy("id", "DESC");
 
-        return DataTables::of($model->get())
+        return DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('image', function($data) {
                     $src = url("uploads/" . $data->image);

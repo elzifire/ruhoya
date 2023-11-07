@@ -11,24 +11,24 @@ use App\Helpers\HttpStatus;
 use App\Helpers\HttpMessage;
 
 use App\Models\Base\ResponseModel;
-use App\Models\Team as Model;
+use App\Models\Collaborator as Model;
 
 use DB;
 use DataTables;
 
-class TeamController extends Controller
+class CollaboratorController extends Controller
 {
 
     public function index()
     {
-        return view('pages.be.team.index');
+        return view('pages.be.collaborator.index');
     }
 
     public function api(Request $request)
     {
-        $model = Model::orderBy("id", "DESC");
+        $model = Model::orderBy("sequence", "ASC");
 
-        return DataTables::of($model->get())
+        return DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('image', function($data) {
                     $src = url("uploads/" . $data->image);
@@ -36,8 +36,8 @@ class TeamController extends Controller
                 })
                 ->addColumn('action', function($data) {
                     return view("components.action", [
-                        "edit"      => url("admin/team/edit/".$data->id),
-                        "delete"    => url("admin/team/delete/".$data->id),
+                        "edit"      => url("admin/collaborator/edit/".$data->id),
+                        "delete"    => url("admin/collaborator/delete/".$data->id),
                     ]);
                 })
                 ->rawColumns(['image', 'action'])
@@ -46,8 +46,8 @@ class TeamController extends Controller
 
     public function create()
     {
-        $action = url('admin/team/store');
-        return view("pages.be.team.form", compact("action"));
+        $action = url('admin/collaborator/store');
+        return view("pages.be.collaborator.form", compact("action"));
     }
 
     public function store(Request $request)
@@ -66,7 +66,7 @@ class TeamController extends Controller
 
         DB::beginTransaction();
         try {
-            $payload["image"] = $request->file("image")->store("teams");
+            $payload["image"] = $request->file("image")->store("collaborators");
             $data = Model::create($payload);
             
             $response->data = $data;
@@ -84,10 +84,10 @@ class TeamController extends Controller
     }
     public function edit($id)
     {
-        $action = url('admin/team/update/' . $id);
+        $action = url('admin/collaborator/update/' . $id);
         $data   = Model::findOrFail($id);
 
-        return view("pages.be.team.form", compact("action", "data"));
+        return view("pages.be.collaborator.form", compact("action", "data"));
     }
 
     public function update(Request $request, $id)
@@ -107,7 +107,7 @@ class TeamController extends Controller
         DB::beginTransaction();
         try {
             if ($request->file("image"))
-                $payload["image"] = $request->file("image")->store("teams");
+                $payload["image"] = $request->file("image")->store("collaborators");
                 
             $data   = Model::findOrFail($id);
             $data->update($payload);

@@ -92,7 +92,7 @@
                             <li><a href="{{url('/')}}">Home</a></li>
                             <li><a href="{{url('/tentang')}}">Tentang</a></li>
                             <li><a href="{{url('/galeri')}}">Galeri</a></li>
-                            <li><a href="{{url('/identifikasi')}}">Identifikasi</a></li>
+                            {{-- <li><a href="{{url('/identifikasi')}}">Identifikasi</a></li> --}}
                             <li><a href="{{url('/database')}}">Database Hoya</a></li>
                             {{-- <li><a href="{{url('/tim-ahli')}}">Tim Ahli</a></li> --}}
                         </ul>

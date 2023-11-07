@@ -58,7 +58,6 @@
                                 <th>Nama</th>
                                 <th>Nama Lokal</th>
                                 <th>Daerah Asal</th>
-                                <th>Author</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -72,14 +71,20 @@
 @endsection
 
 @push('css')
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-     <style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
         #pick-map { height: 512px; }
-     </style>
+        .select2-container .select2-selection--multiple .select2-selection__choice {
+            color: #000 !important;
+        }
+    </style>
 @endpush
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script>
@@ -126,7 +131,6 @@
                     {data: 'name', name: 'name'},
                     {data: 'local_name', name: 'local_name'},
                     {data: 'origin', name: 'origin'},
-                    {data: 'author', name: 'author'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });
@@ -140,16 +144,19 @@
 
             $(document).on("click", "[data-btn-add-images]", function() {
                 var count = $("[data-image-inputs] tr:last-child").data("index") + 1;
-
+                count = Number.isNaN(count) === false ? count : 0
+                
                 var tr = document.createElement("tr");
                 tr.dataset.index = count;
 
                 var tdImage = document.createElement("td");
                 var tdDescription = document.createElement("td");
+                var tdPhotographer = document.createElement("td");
                 var tdAction = document.createElement("td");
 
                 tdImage.classList.add("align-middle");
                 tdDescription.classList.add("align-middle");
+                tdPhotographer.classList.add("align-middle");
                 tdAction.classList.add("align-middle");
 
                 var inputFile = document.createElement("input");
@@ -163,6 +170,11 @@
                 inputDescription.classList.add("form-control");
                 inputDescription.name = `hoya_images[${count}][description]`;
 
+                var inputPhotographer = document.createElement("input");
+                inputPhotographer.type = "text";
+                inputPhotographer.classList.add("form-control");
+                inputPhotographer.name = `hoya_images[${count}][photographer]`;
+
                 var actionBtn = document.createElement("button");
                 actionBtn.type = "button";
                 actionBtn.classList.add("btn", "btn-danger", "btn-sm");
@@ -171,14 +183,16 @@
 
                 tdImage.append(inputFile);
                 tdDescription.append(inputDescription);
+                tdPhotographer.append(inputPhotographer);
                 tdAction.append(actionBtn);
 
-                tr.append(tdImage, tdDescription, tdAction);
+                tr.append(tdImage, tdDescription, tdPhotographer, tdAction);
                 $("[data-image-inputs]").append(tr);
             });
 
              $(document).on("click", "[data-btn-add-spreads]", function() {
                 var count = $("[data-spread-inputs] tr:last-child").data("index") + 1;
+                count = Number.isNaN(count) === false ? count : 0
 
                 var tr = document.createElement("tr");
                 tr.dataset.index = count;

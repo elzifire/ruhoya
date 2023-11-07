@@ -28,7 +28,7 @@ class InsectAssociationController extends Controller
     {
         $model = Model::orderBy("id", "DESC");
 
-        return DataTables::of($model->get())
+        return DataTables::of($model)
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [

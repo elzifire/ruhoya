@@ -40,12 +40,15 @@
                                         <td class="px-2" style="max-width: 40px">
                                             @if (isset($hoya->hoyaImages[0]))
                                                 <img src="{{url('uploads/' . $hoya->hoyaImages[0]->image)}}" class="img-fluid" />
+                                                @if (!empty($hoya->hoyaImages[0]->photographer))
+                                                    <small class="text-muted"><i class="fas fa-camera"></i> {{$hoya->hoyaImages[0]->photographer}}</small>
+                                                @endif
                                             @else
                                                 <img src="{{asset("FE/images/not_found.jpg")}}" class="img-fluid" />
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{url('database/' . $hoya->id)}}">{{$hoya->name}}</a>
+                                            <a href="{{url('database/' . $hoya->id)}}">Hoya <i>{{$hoya->name}}</i></a>
                                         </td>
                                     </tr>
                                 @empty

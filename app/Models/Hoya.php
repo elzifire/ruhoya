@@ -32,6 +32,7 @@ class Hoya extends Model
         "publication_link",
         "etymology",
         "benefit",
+        "description",
         "stem",
         "leaves",
         "flowers",
@@ -40,10 +41,9 @@ class Hoya extends Model
         "flower_colors",
         "roots",
         "shoots",
-        "reproduction_system",
     ];
 
-    public $with = ["hoyaImages", "hoyaSpreads"];
+    public $with = ["hoyaImages", "hoyaSpreads", "hoyaSequences"];
 
     public static function rules()
     {
@@ -57,17 +57,8 @@ class Hoya extends Model
             "publication_link"  => "required|url",
             "etymology"         => "required",
             "benefit"           => "required",
-            "stem"              => "required",
-            "leaves"            => "required",
-            "flowers"           => "required",
-            "flower_buds"       => "required",
-            "flower_size"       => "required",
-            "flower_colors"     => "required",
-            "roots"             => "required",
-            "shoots"            => "required",
-            "reproduction_system"   => "required",
-            "hoya_images"       => "array",
-            "hoya_spreads"      => "array",
+            "hoya_images"       => "required|array",
+            "hoya_spreads"      => "required|array",
         ];
     }
 
@@ -77,5 +68,9 @@ class Hoya extends Model
     
     public function hoyaSpreads() {
         return $this->hasMany(HoyaSpread::class);
+    }
+    
+    public function hoyaSequences() {
+        return $this->hasMany(HoyaSequence::class);
     }
 }

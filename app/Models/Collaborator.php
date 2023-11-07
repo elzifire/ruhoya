@@ -6,22 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Team extends Model
+class Collaborator extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         "name",
-        "title",
+        "institute",
+        "contribution",
         "image",
+        "sequence",
     ];
 
     public static function rules()
     {
         return [
-            "name"  => "required",
-            "title"  => "required",
-            "image"  => "required"
+            "name"          => "required",
+            "institute"     => "required",
+            "contribution"  => "required",
+            "sequence"      => "required",
         ];
     }
 }

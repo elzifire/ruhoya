@@ -50,8 +50,8 @@ class Menu
                 "icon"  => "bx bx-image"
             ],
             [
-                "title" => "Tim Ahli",
-                "url"   => "admin/team",
+                "title" => "Kolaborator",
+                "url"   => "admin/collaborator",
                 "icon"  => "bx bx-user"
             ]
         ];

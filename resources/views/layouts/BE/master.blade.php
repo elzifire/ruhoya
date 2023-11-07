@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" data-modal>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" data-modal>
         <div class="modal-dialog" role="document" data-modal-dialog>
             <div class="modal-content" data-modal-content>
                 <div class="modal-header">
@@ -112,13 +112,12 @@
         });
         
         function populateErrorMessage(errors) {
-            console.log(errors)
             var ObjToArray = Object.entries(errors);
             ObjToArray.forEach((value) => {
                 var input = $(`[name='${value[0]}']`);
                 var feedback = `<div class='invalid-feedback'>${value[1][0]}</div>`;
                 
-
+                if (input.length === 0) return toastAlert("error", value[1][0]);
                 if (input.length > 1) {
                     $(`[data-input='${value[0]}']`).append(`<p class='d-block invalid-feedback text-danger' style='margin-top: 0.25rem; font-size: 0.875em'>${value[1][0]}</p>`);
                 } else {

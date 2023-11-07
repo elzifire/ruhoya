@@ -46,6 +46,36 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 content-column">
+                <section class="team-section p_relative sec-pad">
+                    <div class="auto-container">
+                        <div class="sec-title centred mb_45">
+                            {{-- <span class="sub-title">Kontributor</span> --}}
+                            <h2>Kontributor</h2>
+                        </div>
+                        <div class="row clearfix">
+                            @foreach (\App\Models\Collaborator::orderBy("sequence", "ASC")->get() as $team)
+                                <div class="col-lg-4 col-md-6 col-sm-12 team-block">
+                                    <div class="team-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                        <div class="inner-box p_relative d_block pl_30 pt_30 pr_30 pb_25 b_shadow_7 b_radius_5">
+                                            <figure class="image-box p_relative d_block b_radius_5">
+                                                <a href="{{url('tim-ahli')}}"><img src="{{url('uploads/' . $team->image)}}" alt="" /></a>
+                                            </figure>
+                                            <div class="lower-content p_relative d_block pt_30">
+                                                <h3 class="p_relative d_block fs_22 fw_bold mb_5">
+                                                    <a href="{{url('tim-ahli')}}" class="d_iblock hov_color">{{$team->name}}</a>
+                                                </h3>
+                                                <span class="designation p_relative d_block fs_15 fw_medium">{{$team->institute}}</span>
+                                                <span class="designation p_relative d_block fs_15">{{$team->contribution}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
 </section>

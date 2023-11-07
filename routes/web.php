@@ -18,6 +18,10 @@ Route::get("/clear", function() {
     $exitCode3  = Artisan::call('view:clear');
 });
 
+Route::get("/migrate", function() {
+    $exitCode1  = Artisan::call('migrate');
+});
+
 Route::get("/", "FE\HomeController@index");
 Route::get("/tentang", "FE\AboutController@index");
 Route::get("/galeri", "FE\GalleryController@index");
@@ -80,12 +84,12 @@ Route::middleware("auth")->group(function() {
         Route::post("/slider/update/{id}", "BE\SliderController@update");
         Route::get("/slider/delete/{id}", "BE\SliderController@destroy");
     
-        Route::get("/team", "BE\TeamController@index");
-        Route::get("/team/api", "BE\TeamController@api");
-        Route::get("/team/create", "BE\TeamController@create");
-        Route::post("/team/store", "BE\TeamController@store");
-        Route::get("/team/edit/{id}", "BE\TeamController@edit");
-        Route::post("/team/update/{id}", "BE\TeamController@update");
-        Route::get("/team/delete/{id}", "BE\TeamController@destroy");
+        Route::get("/collaborator", "BE\CollaboratorController@index");
+        Route::get("/collaborator/api", "BE\CollaboratorController@api");
+        Route::get("/collaborator/create", "BE\CollaboratorController@create");
+        Route::post("/collaborator/store", "BE\CollaboratorController@store");
+        Route::get("/collaborator/edit/{id}", "BE\CollaboratorController@edit");
+        Route::post("/collaborator/update/{id}", "BE\CollaboratorController@update");
+        Route::get("/collaborator/delete/{id}", "BE\CollaboratorController@destroy");
     });
 });
