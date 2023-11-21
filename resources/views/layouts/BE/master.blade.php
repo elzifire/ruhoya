@@ -155,7 +155,8 @@
                     formModal.show();
                 },
                 error: function(reject) {
-                    toastAlert("error", "Terjadi kesalahan pada server");
+                    const response = reject.responseJSON ?? {};
+                    toastAlert("error", response.message);
                     console.log(reject)
                 }
             })
@@ -183,7 +184,8 @@
                         dt.ajax.reload();
                     },
                     error: function(reject) {
-                        toastAlert("error", "Terjadi kesalahan pada server");
+                        const response = reject.responseJSON ?? {};
+                        toastAlert("error", response.message);
                     }
                 })
             })

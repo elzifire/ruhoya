@@ -91,5 +91,13 @@ Route::middleware("auth")->group(function() {
         Route::get("/collaborator/edit/{id}", "BE\CollaboratorController@edit");
         Route::post("/collaborator/update/{id}", "BE\CollaboratorController@update");
         Route::get("/collaborator/delete/{id}", "BE\CollaboratorController@destroy");
+
+        Route::get("/user", "BE\UserController@index");
+        Route::get("/user/api", "BE\UserController@api");
+        Route::get("/user/create", "BE\UserController@create");
+        Route::post("/user/store", "BE\UserController@store");
+        Route::get("/user/edit/{id}", "BE\UserController@edit");
+        Route::post("/user/update/{id}", "BE\UserController@update");
+        Route::get("/user/delete/{id}", "BE\UserController@destroy");
     });
 });

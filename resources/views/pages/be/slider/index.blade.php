@@ -104,7 +104,7 @@
                         if (response.status_code == 500) return toastAlert("error", response.message);
                         if (response.status_code == 422) return populateErrorMessage(response.errors);
 
-                        toastAlert("error", "Terjadi kesalahan pada server");
+                        toastAlert("error", response.message);
                     },
                 });
             });

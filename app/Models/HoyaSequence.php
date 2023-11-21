@@ -19,8 +19,8 @@ class HoyaSequence extends Model
     public static function rules($isUpdate = false)
     {
         return [
-            "hoya_id"       => "requried",
-            "dna_sequence"  => "required",
+            // "hoya_id"       => "requried",
+            // "dna_sequence"  => "required",
         ];
     }
 }

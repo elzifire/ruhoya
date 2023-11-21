@@ -20,10 +20,10 @@ class HoyaSpread extends Model
     public static function rules()
     {
         return [
-            "hoya_id"       => "requried",
-            "latitude"      => "required",
-            "longitude"     => "required",
-            "description"   => "required",
+            // "hoya_id"       => "requried",
+            // "latitude"      => "required",
+            // "longitude"     => "required",
+            // "description"   => "required",
         ];
     }
 }

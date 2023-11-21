@@ -48,17 +48,17 @@ class Hoya extends Model
     public static function rules()
     {
         return [
-            "name"              => "required",
-            "local_name"        => "required",
-            "author"            => "required",
-            "origin"            => "required",
-            "type_information"  => "required",
-            "publication"       => "required",
-            "publication_link"  => "required|url",
-            "etymology"         => "required",
-            "benefit"           => "required",
-            "hoya_images"       => "required|array",
-            "hoya_spreads"      => "required|array",
+            // "name"              => "required",
+            // "local_name"        => "required",
+            // "author"            => "required",
+            // "origin"            => "required",
+            // "type_information"  => "required",
+            // "publication"       => "required",
+            // "publication_link"  => "required|url",
+            // "etymology"         => "required",
+            // "benefit"           => "required",
+            // "hoya_images"       => "required|array",
+            // "hoya_spreads"      => "required|array",
         ];
     }
 

@@ -1,5 +1,5 @@
-@extends("layouts.BE.master", ["breadcrumb" => ["Home", "Asosiasi Serangga"]])
-@section("title", "Asosiasi Serangga")
+@extends("layouts.BE.master", ["breadcrumb" => ["Home", "User"]])
+@section("title", "User")
 @section("content")
 <div class="row">
     <div class="col-lg-12">
@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="flex gap-1">
-                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/insect-association/create')}}', 'create', 'lg')">
+                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/user/create')}}', 'create', 'lg')">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <i class="bx bx-plus label-icon align-middle fs-16 me-2"></i>
@@ -36,6 +36,7 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>Nama</th>
+                                <th>Email</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,9 +52,9 @@
 @push('scripts')
     <script>
         var dt;
-        var API_URL = "{{ url('/admin/insect-association/api') }}";
+        var API_URL = "{{ url('/admin/user/api') }}";
 
-        $("[data-menu-url='insect-association']").addClass("active");
+        $("[data-menu-url='user']").addClass("active");
 
         $(document).ready(function() {
             dt = $("#datatable").DataTable({
@@ -65,6 +66,7 @@
                 serverSide: true,
                 columns: [
                     {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });

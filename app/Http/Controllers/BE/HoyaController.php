@@ -78,9 +78,9 @@ class HoyaController extends Controller
 
         DB::beginTransaction();
         try {
-            $hoyaImages     = $payload["hoya_images"];
-            $hoyaSpreads    = $payload["hoya_spreads"];
-            $payload["benefit"] = implode(",", $payload["benefit"]);
+            $hoyaImages     = $payload["hoya_images"] ?? [];
+            $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
+            $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
             unset($payload["hoya_images"], $payload["hoya_spreads"]);
 
@@ -172,9 +172,9 @@ class HoyaController extends Controller
 
         DB::beginTransaction();
         try {
-            $hoyaImages     = $payload["hoya_images"];
-            $hoyaSpreads    = $payload["hoya_spreads"];
-            $payload["benefit"] = implode(",", $payload["benefit"]);
+            $hoyaImages     = $payload["hoya_images"] ?? [];
+            $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
+            $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
             unset($payload["hoya_images"], $payload["hoya_spreads"]);
 
@@ -317,6 +317,7 @@ class HoyaController extends Controller
 
     private function checkForBenefitEnumeration($benefits)
     {
+        if (!is_array($benefits)) return;
         foreach ($benefits as $index => $benefit) {
             $count = Enumeration::where("value", $benefit)->count();
             if ($count < 1) Enumeration::insert([

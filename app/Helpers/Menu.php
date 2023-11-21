@@ -52,8 +52,17 @@ class Menu
             [
                 "title" => "Kolaborator",
                 "url"   => "admin/collaborator",
+                "icon"  => "bx bxs-user-badge"
+            ],
+            [
+                "title" => "MASTER USER",
+                "url"   => null,
+            ],
+            [
+                "title" => "User",
+                "url"   => "admin/user",
                 "icon"  => "bx bx-user"
-            ]
+            ],
         ];
     }
 }

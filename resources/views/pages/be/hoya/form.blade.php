@@ -2,47 +2,47 @@
     {{csrf_field()}}
     <div class="mb-3">
         <label for="name" class="form-label">Nama</label>
-        <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" required>
+        <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" {{--required --}}>
     </div>
     <div class="mb-3">
         <label for="etymology" class="form-label">Etimologi</label>
-        <input type="text" class="form-control" name="etymology" value="{{isset($data) ? $data['etymology'] : ''}}" required>
+        <input type="text" class="form-control" name="etymology" value="{{isset($data) ? $data['etymology'] : ''}}" {{--required --}}>
     </div>
     <div class="mb-3">
         <div class="row">
             <div class="col">
                 <label for="origin" class="form-label">Daerah Asal</label>
-                <input type="text" class="form-control" name="origin" value="{{isset($data) ? $data['origin'] : ''}}" required>
+                <input type="text" class="form-control" name="origin" value="{{isset($data) ? $data['origin'] : ''}}" {{--required --}}>
             </div>
             <div class="col">
                 <label for="local_name" class="form-label">Nama Daerah</label>
-                <input type="text" class="form-control" name="local_name" value="{{isset($data) ? $data['local_name'] : ''}}" required>
+                <input type="text" class="form-control" name="local_name" value="{{isset($data) ? $data['local_name'] : ''}}" {{--required --}}>
             </div>
         </div>
     </div>
     <div class="mb-3">
         <label for="author" class="form-label">Author</label>
-        <input type="text" class="form-control" name="author" value="{{isset($data) ? $data['author'] : ''}}" required>
+        <input type="text" class="form-control" name="author" value="{{isset($data) ? $data['author'] : ''}}" {{--required --}}>
     </div>
     <div class="mb-3">
         <div class="row">
             <div class="col">
                 <label for="publication" class="form-label">Publikasi</label>
-                <input type="text" class="form-control" name="publication" value="{{isset($data) ? $data['publication'] : ''}}" required>
+                <input type="text" class="form-control" name="publication" value="{{isset($data) ? $data['publication'] : ''}}" {{--required --}}>
             </div>
             <div class="col">
                 <label for="publication_link" class="form-label">Link Publikasi</label>
-                <input type="url" class="form-control" name="publication_link" value="{{isset($data) ? $data['publication_link'] : ''}}" required>                
+                <input type="url" class="form-control" name="publication_link" value="{{isset($data) ? $data['publication_link'] : ''}}" {{--required --}}>                
             </div>
         </div>
     </div>
     <div class="mb-3">
         <label for="type_information" class="form-label">Informasi Tipe</label>
-        <input type="text" class="form-control" name="type_information" value="{{isset($data) ? $data['type_information'] : ''}}" required>
+        <input type="text" class="form-control" name="type_information" value="{{isset($data) ? $data['type_information'] : ''}}" {{--required --}}>
     </div>
     <div class="mb-3">
         <label for="benefit" class="form-label">Manfaat</label>
-        <select class="form-control" name="benefit[]" id="benefit" multiple="multiple" required>
+        <select class="form-control" name="benefit[]" id="benefit" multiple="multiple" {{--required --}}>
             @php $selectedBenefits = isset($data) ? explode(",", $data["benefit"]) : []; @endphp
             @foreach ($benefits as $item)
                 <option value="{{$item->value}}" {{(isset($data) && in_array($item->value, $selectedBenefits)) ? "selected" : ""}}>{{$item->value}}</option>
@@ -152,10 +152,10 @@
                                     <input type="file" class="form-control" name="hoya_images[{{$index}}][file]" accept="image/*">
                                 </td>
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][description]" value="{{$hoyaImage->description}}" required>
+                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][description]" value="{{$hoyaImage->description}}" {{--required --}}>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][photographer]" value="{{$hoyaImage->photographer}}" required>
+                                    <input type="text" class="form-control" name="hoya_images[{{$index}}][photographer]" value="{{$hoyaImage->photographer}}" {{--required --}}>
                                 </td>
                                 <td class="d-flex gap-1 align-middle">
                                     <a href="{{url('uploads/' . $hoyaImage->image)}}" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
@@ -170,13 +170,13 @@
                     @else
                         <tr data-index="0">
                             <td class="align-middle">
-                                <input type="file" class="form-control" name="hoya_images[0][file]" accept="image/*" {{!isset($data) ? "required" : ""}}>
+                                <input type="file" class="form-control" name="hoya_images[0][file]" accept="image/*" {{!isset($data) ? "{{--required --}}" : ""}}>
                             </td>
                             <td class="align-middle">
-                                <input type="text" class="form-control" name="hoya_images[0][description]" required>
+                                <input type="text" class="form-control" name="hoya_images[0][description]" {{--required --}}>
                             </td>
                             <td class="align-middle">
-                                <input type="text" class="form-control" name="hoya_images[0][photographer]" required>
+                                <input type="text" class="form-control" name="hoya_images[0][photographer]" {{--required --}}>
                             </td>
                             <td class="align-middle"></td>
                         </tr>
@@ -208,13 +208,13 @@
                             <tr data-index="{{$index}}">
                                 <input type="hidden"  name="hoya_spreads[{{$index}}][id]" value="{{$hoyaSpread->id}}">
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][description]" value="{{$hoyaSpread->description}}" required>
+                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][description]" value="{{$hoyaSpread->description}}" {{--required --}}>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][latitude]" value="{{$hoyaSpread->latitude}}" required>
+                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][latitude]" value="{{$hoyaSpread->latitude}}" {{--required --}}>
                                 </td>
                                 <td class="align-middle">
-                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][longitude]" value="{{$hoyaSpread->longitude}}" required>
+                                    <input type="text" class="form-control" name="hoya_spreads[{{$index}}][longitude]" value="{{$hoyaSpread->longitude}}" {{--required --}}>
                                 </td>
                                 <td class="align-middle" style="white-space: nowrap;">
                                     <button type="button" class="btn btn-primary btn-sm" data-pick-from-map="{{$index}}">

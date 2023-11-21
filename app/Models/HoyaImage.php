@@ -21,10 +21,10 @@ class HoyaImage extends Model
     public static function rules($isUpdate = false)
     {
         return [
-            "hoya_id"       => "requried",
-            "file"          => [Rule::requiredIf($isUpdate === false), "file"],
-            "description"   => "required",
-            "photographer"  => "required",
+            // "hoya_id"       => "requried",
+            // "file"          => [Rule::requiredIf($isUpdate === false), "file"],
+            // "description"   => "required",
+            // "photographer"  => "required",
         ];
     }
 }
