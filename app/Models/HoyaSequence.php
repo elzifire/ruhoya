@@ -12,6 +12,7 @@ class HoyaSequence extends Model
 
     protected $fillable = [
         "hoya_id",
+        "dna_type",
         "dna_sequence",
         "link",
     ];

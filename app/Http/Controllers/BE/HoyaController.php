@@ -14,6 +14,7 @@ use App\Models\Base\ResponseModel;
 use App\Models\Hoya as Model;
 use App\Models\HoyaImage;
 use App\Models\HoyaSpread;
+use App\Models\HoyaSequence;
 use App\Models\Enumeration;
 
 use App\Exports\HoyaExport;
@@ -28,7 +29,8 @@ class HoyaController extends Controller
 
     public function index()
     {
-        return view('pages.be.hoya.index');
+        $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
+        return view('pages.be.hoya.index', compact("dnaTypes"));
     }
 
     public function api(Request $request)
@@ -55,11 +57,12 @@ class HoyaController extends Controller
         $action = url('admin/hoya/store');
         $deps   = [];
         $benefits   = Enumeration::where("key", "Benefit")->get();
+        $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
 
         foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
             $deps[$enum] = Enumeration::where("key", $enum)->get();
 
-        return view("pages.be.hoya.form", compact("action", "deps", "benefits"));
+        return view("pages.be.hoya.form", compact("action", "deps", "benefits", "dnaTypes"));
     }
 
     public function store(Request $request)
@@ -80,9 +83,10 @@ class HoyaController extends Controller
         try {
             $hoyaImages     = $payload["hoya_images"] ?? [];
             $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
+            $hoyaSequences  = $payload["hoya_sequences"] ?? [];
             $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
-            unset($payload["hoya_images"], $payload["hoya_spreads"]);
+            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"]);
 
             $data = Model::create($payload);
             $hoyaId = $data->id;
@@ -92,6 +96,7 @@ class HoyaController extends Controller
             $response->data = $data;
             $response->data->hoya_images    = [];
             $response->data->hoya_spreads   = [];
+            $response->data->hoya_sequences   = [];
 
             foreach ($hoyaImages as $key => $hoyaImage) {
                 $validator = Validator::make($hoyaImage, HoyaImage::rules());
@@ -131,6 +136,25 @@ class HoyaController extends Controller
                 ]);
             }
 
+            foreach ($hoyaSequences as $key => $hoyaSequence) {
+                $validator = Validator::make($hoyaSequence, HoyaSequence::rules());
+
+                if ($validator->fails()) {
+                    $response->status_code  = HttpStatus::VALIDATION_ERROR;
+                    $response->message      = HttpMessage::VALIDATION_ERROR;
+                    $response->errors       = $validator->errors();
+                    $response->data         = null;
+                    return response()->json($response, $response->status_code);
+                }
+
+                HoyaSequence::create([
+                    "hoya_id"       => $hoyaId,
+                    "dna_type"      => $hoyaSequence["dna_type"],
+                    "dna_sequence"  => $hoyaSequence["dna_sequence"],
+                    "link"          => $hoyaSequence["link"]
+                ]);
+            }
+
     		DB::commit();
 
             return response()->json($response);
@@ -149,11 +173,12 @@ class HoyaController extends Controller
         $data   = Model::findOrFail($id);
         $deps   = [];
         $benefits   = Enumeration::where("key", "Benefit")->get();
+        $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
 
         foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
             $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
 
-        return view("pages.be.hoya.form", compact("action", "data", "deps", "benefits"));
+        return view("pages.be.hoya.form", compact("action", "data", "deps", "benefits", "dnaTypes"));
     }
 
     public function update(Request $request, $id)
@@ -174,9 +199,10 @@ class HoyaController extends Controller
         try {
             $hoyaImages     = $payload["hoya_images"] ?? [];
             $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
+            $hoyaSequences  = $payload["hoya_sequences"] ?? [];
             $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
-            unset($payload["hoya_images"], $payload["hoya_spreads"]);
+            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"]);
 
             $data   = Model::findOrFail($id);
             $data->update($payload);
@@ -187,9 +213,11 @@ class HoyaController extends Controller
             $response->data = $data;
             $response->data->hoya_images    = [];
             $response->data->hoya_spreads   = [];
+            $response->data->hoya_sequences   = [];
 
             $hoyaImageIds   = [];
             $hoyaSpreadIds  = [];
+            $hoyaSequenceIds  = [];
 
             foreach ($hoyaImages as $key => $hoyaImage) {
                 $validator = Validator::make($hoyaImage, HoyaImage::rules(true));
@@ -249,8 +277,37 @@ class HoyaController extends Controller
                 array_push($hoyaSpreadIds, $hoyaSpread["id"]);
             }
 
+            foreach ($hoyaSequences as $key => $hoyaSequence) {
+                $validator = Validator::make($hoyaSequence, HoyaSequence::rules());
+
+                if ($validator->fails()) {
+                    $response->status_code  = HttpStatus::VALIDATION_ERROR;
+                    $response->message      = HttpMessage::VALIDATION_ERROR;
+                    $response->errors       = $validator->errors();
+                    $response->data         = null;
+                    return response()->json($response, $response->status_code);
+                }
+
+                $payload = [
+                    "hoya_id"       => $hoyaId,
+                    "dna_type"      => $hoyaSequence["dna_type"],
+                    "dna_sequence"  => $hoyaSequence["dna_sequence"],
+                    "link"          => $hoyaSequence["link"]
+                ];
+
+                if (isset($hoyaSequence["id"])) {
+                    $hoyaSequence  = HoyaSequence::findOrFail($hoyaSequence["id"]);
+                    $hoyaSequence->update($payload);
+                } else {
+                    $hoyaSequence = HoyaSequence::create($payload);
+                }
+
+                array_push($hoyaSequenceIds, $hoyaSequence["id"]);
+            }
+
             HoyaImage::where("hoya_id", $hoyaId)->whereNotIn("id", $hoyaImageIds)->delete();
             HoyaSpread::where("hoya_id", $hoyaId)->whereNotIn("id", $hoyaSpreadIds)->delete();
+            HoyaSequence::where("hoya_id", $hoyaId)->whereNotIn("id", $hoyaSequenceIds)->delete();
 
     		DB::commit();
             $response->data = $data;

@@ -248,6 +248,72 @@
             </table>
         </div>
     </div>
+    <div class="mb-3">
+        <div class="d-flex justify-content-between border-bottom border-4 border-primary pb-2 mb-4 mt-4">
+            <h4>Sekuens DNA</h4>
+            <button type="button" class="btn btn-primary btn-sm" data-btn-add-sequences>
+                <i class="bx bx-plus align-middle"></i>
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th style="white-space: nowrap;">Tipe</th>
+                        <th style="white-space: nowrap;">Sekuens</th>
+                        <th style="white-space: nowrap;">Link</th>
+                        <th style="white-space: nowrap;"></th>
+                    </tr>
+                </thead>
+                <tbody data-sequence-inputs>
+                    @if (isset($data))
+                        @foreach ($data->hoyaSequences as $index => $hoyaSequence)
+                            <tr data-index="{{$index}}">
+                                <input type="hidden"  name="hoya_sequences[{{$index}}][id]" value="{{$hoyaSequence->id}}">
+                                <td class="align-middle">
+                                    <select name="hoya_sequences[{{$index}}][dna_type]" class="form-select">
+                                        <option value=""></option>
+                                        @foreach ($dnaTypes as $type)
+                                            <option value="{{$type->value}}" {{$hoyaSequence->dna_type === $type->value ? "selected" : ""}}>{{$type->value}}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <textarea class="form-control" name="hoya_sequences[{{$index}}][dna_sequence]" {{--required --}}>{{$hoyaSequence->dna_sequence}}</textarea>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="url" class="form-control" name="hoya_sequences[{{$index}}][link]" value="{{$hoyaSequence->link}}" {{--required --}}>
+                                </td>
+                                <td class="align-middle" style="white-space: nowrap;">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="$(`[data-spread-inputs] > [data-index='{{$index}}']`).remove()">
+                                        <i class="bx bx-trash align-middle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr data-index="0">
+                            <td class="align-middle">
+                                <select name="hoya_sequences[0][dna_type]" class="form-select">
+                                    <option value=""></option>
+                                    @foreach ($dnaTypes as $type)
+                                        <option value="{{$type->value}}">{{$type->value}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td class="align-middle">
+                                <textarea class="form-control" name="hoya_sequences[0][dna_sequence]"></textarea>
+                            </td>
+                            <td class="align-middle">
+                                <input type="url" class="form-control" name="hoya_sequences[0][link]">
+                            </td>
+                            <td class="align-middle" style="white-space: nowrap;"></td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">Kirim</button>
     </div>

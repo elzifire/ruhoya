@@ -84,6 +84,12 @@
     </style>
 @endpush
 @push('scripts')
+    <div class="d-hidden" data-type-options>
+        <option value=""></option>
+        @foreach ($dnaTypes as $type)
+            <option value="{{$type->value}}">{{$type->value}}</option>
+        @endforeach
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
@@ -190,7 +196,7 @@
                 $("[data-image-inputs]").append(tr);
             });
 
-             $(document).on("click", "[data-btn-add-spreads]", function() {
+            $(document).on("click", "[data-btn-add-spreads]", function() {
                 var count = $("[data-spread-inputs] tr:last-child").data("index") + 1;
                 count = Number.isNaN(count) === false ? count : 0
 
@@ -243,6 +249,56 @@
 
                 tr.append(tdDescription, tdLatitude, tdLongitude, tdAction);
                 $("[data-spread-inputs]").append(tr);
+            });
+
+            $(document).on("click", "[data-btn-add-sequences]", function() {
+                var count = $("[data-sequence-inputs] tr:last-child").data("index") + 1;
+                count = Number.isNaN(count) === false ? count : 0
+
+                var tr = document.createElement("tr");
+                tr.dataset.index = count;
+
+                var tdType = document.createElement("td");
+                var tdSequence = document.createElement("td");
+                var tdLink = document.createElement("td");
+                var tdAction = document.createElement("td");
+
+                tdType.classList.add("align-middle");
+                tdSequence.classList.add("align-middle");
+                tdLink.classList.add("align-middle");
+                tdAction.classList.add("align-middle");
+                tdAction.style.whiteSpace = "nowrap"
+
+                var inputType = document.createElement("select");
+                inputType.classList.add("form-select");
+                inputType.name = `hoya_sequences[${count}][dna_type]`;
+                document.querySelectorAll('[data-type-options] > *').forEach((opt) => {
+                    var option = new Option(opt.value, opt.value);
+                    inputType.append(option)
+                })
+
+                var inputSequence = document.createElement("textarea");
+                inputSequence.classList.add("form-control");
+                inputSequence.name = `hoya_sequences[${count}][dna_sequence]`;
+
+                var inputLink = document.createElement("input");
+                inputLink.type = "url";
+                inputLink.classList.add("form-control");
+                inputLink.name = `hoya_sequences[${count}][link]`;
+
+                var actionBtn = document.createElement("button");
+                actionBtn.type = "button";
+                actionBtn.classList.add("btn", "btn-danger", "btn-sm");
+                actionBtn.innerHTML = `<i class="bx bx-trash align-middle"></i>`;
+                actionBtn.addEventListener("click", function() { $(`[data-sequence-inputs] > [data-index="${count}"]`).remove(); })
+
+                tdType.append(inputType);
+                tdSequence.append(inputSequence);
+                tdLink.append(inputLink);
+                tdAction.append(actionBtn);
+
+                tr.append(tdType, tdSequence, tdLink, tdAction);
+                $("[data-sequence-inputs]").append(tr);
             });
 
             $(document).on("click", "[data-pick-from-map]", function() {
