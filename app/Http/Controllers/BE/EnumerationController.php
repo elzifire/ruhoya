@@ -29,6 +29,20 @@ class EnumerationController extends Controller
         $model = Model::orderBy("group", "DESC");
 
         return DataTables::of($model)
+                ->filter(function ($query) use ($request) {
+                    $filterable = [
+                        "group",
+                        "key",
+                        "value",
+                    ];
+
+                    $search = $request["search"]["value"];
+                    if ($search) {
+                        foreach ($filterable as $key => $column) {
+                            $query->orWhere($column, "like", "%$search%");
+                        }    
+                    }
+                })
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [

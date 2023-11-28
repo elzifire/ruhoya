@@ -29,6 +29,22 @@ class CollaboratorController extends Controller
         $model = Model::orderBy("sequence", "ASC");
 
         return DataTables::of($model)
+                ->filter(function ($query) use ($request) {
+                    $filterable = [
+                        "name",
+                        "institute",
+                        "contribution",
+                        "image",
+                        "sequence",
+                    ];
+
+                    $search = $request["search"]["value"];
+                    if ($search) {
+                        foreach ($filterable as $key => $column) {
+                            $query->orWhere($column, "like", "%$search%");
+                        }    
+                    }
+                })
                 ->addIndexColumn()
                 ->addColumn('image', function($data) {
                     $src = url("uploads/" . $data->image);

@@ -29,6 +29,18 @@ class PestController extends Controller
         $model = Model::orderBy("id", "DESC");
 
         return DataTables::of($model)
+                ->filter(function ($query) use ($request) {
+                    $filterable = [
+                        "name",
+                    ];
+
+                    $search = $request["search"]["value"];
+                    if ($search) {
+                        foreach ($filterable as $key => $column) {
+                            $query->orWhere($column, "like", "%$search%");
+                        }    
+                    }
+                })
                 ->addIndexColumn()
                 ->addColumn('action', function($data) {
                     return view("components.action", [

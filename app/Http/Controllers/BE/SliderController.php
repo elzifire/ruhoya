@@ -29,6 +29,20 @@ class SliderController extends Controller
         $model = Model::orderBy("id", "DESC");
 
         return DataTables::of($model)
+                ->filter(function ($query) use ($request) {
+                    $filterable = [
+                        "title",
+                        "description",
+                        "image",
+                    ];
+
+                    $search = $request["search"]["value"];
+                    if ($search) {
+                        foreach ($filterable as $key => $column) {
+                            $query->orWhere($column, "like", "%$search%");
+                        }    
+                    }
+                })
                 ->addIndexColumn()
                 ->addColumn('image', function($data) {
                     $src = url("uploads/" . $data->image);

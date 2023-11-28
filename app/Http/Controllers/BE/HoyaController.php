@@ -35,9 +35,37 @@ class HoyaController extends Controller
 
     public function api(Request $request)
     {
-        $model = Model::orderBy("id", "DESC");
+        $model = Model::orderBy("created_at", "DESC");
+        return DataTables::eloquent($model)
+                ->filter(function ($query) use ($request) {
+                    $filterable = [
+                        "name",
+                        "local_name",
+                        "author",
+                        "origin",
+                        "type_information",
+                        "publication",
+                        "publication_link",
+                        "etymology",
+                        "benefit",
+                        "description",
+                        "stem",
+                        "leaves",
+                        "flowers",
+                        "flower_buds",
+                        "flower_size",
+                        "flower_colors",
+                        "roots",
+                        "shoots",
+                    ];
 
-        return DataTables::of($model)
+                    $search = $request["search"]["value"];
+                    if ($search) {
+                        foreach ($filterable as $key => $column) {
+                            $query->orWhere($column, "like", "%$search%");
+                        }    
+                    }
+                })
                 ->addIndexColumn()
                 ->addColumn('name', function($data) {
                     return "Hoya <i>{$data->name}</i>, <b>{$data->author}</b>";
@@ -48,6 +76,7 @@ class HoyaController extends Controller
                         "delete"    => url("admin/hoya/delete/".$data->id),
                     ]);
                 })
+                ->smart(false)
                 ->rawColumns(['name', 'action'])
                 ->make(true);
     }
