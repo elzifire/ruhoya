@@ -24,42 +24,6 @@
                 </div>
                 <div class="right-column pull-right">
                     <ul class="info-box clearfix">
-                        <li class="search-box-outer">
-                            <div class="dropdown">
-                                <button
-                                class="search-box-btn"
-                                type="button"
-                                id="dropdownMenu3"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                >
-                                <i class="fas fa-search"></i>
-                            </button>
-                            <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
-                                <div class="form-container">
-                                    <form method="post" action="blog.html">
-                                        <div class="form-group">
-                                            <input
-                                            type="search"
-                                            name="search-field"
-                                            value=""
-                                            placeholder="Search...."
-                                            required=""
-                                            />
-                                            <button type="submit" class="search-btn">
-                                                <span class="fas fa-search"></span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon-box"><i class="fas fa-phone"></i></div>
-                        <p>Call: <a href="tel:12345615523">123 4561 5523</a></p>
-                    </li>
                     <li>
                         <div class="icon-box"><i class="fas fa-envelope"></i></div>
                         <p>Email: <a href="tel:ruhoya.ina@gmail.com">ruhoya.ina@gmail.com</a></p>
@@ -143,7 +107,6 @@
             <h4>Contact Info</h4>
             <ul>
                 <li>Center for Plant Conservation-Bogor Botanical Gardens, Indonesian Institute of Sciences. Jln. Ir. H. Juanda No. 13 Bogor 16122</li>
-                <li><a href="tel:+8801682648101">+88 01682648101</a></li>
                 <li><a href="mailto:ruhoya.ina@gmail.com">ruhoya.ina@gmail.com</a></li>
             </ul>
         </div>
