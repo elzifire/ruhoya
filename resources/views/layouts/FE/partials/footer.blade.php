@@ -77,15 +77,14 @@
                                             <ul class="contact-info clearfix">
                                                 <li class="p_relative d_block mb_20">
                                                     <p class="fs_15">
-                                                        Jl. Sholeh Iskandar, RT.01/RW.10, Kedungbadak, Kec. Tanah Sereal, Kota Bogor, Jawa Barat
-                                                        16162
+                                                        Center for Plant Conservation-Bogor Botanical Gardens, Indonesian Institute of Sciences. Jln. Ir. H. Juanda No. 13 Bogor 16122
                                                     </p>
                                                 </li>
                                                 <li class="p_relative d_block mb_20">
                                                     <p class="fs_15"><a href="tel:23055873407">02518356884</a></p>
                                                 </li>
                                                 <li class="p_relative d_block">
-                                                    <p class="fs_15"><a href="mailto:info@example.com">info@ruhoya.id</a></p>
+                                                    <p class="fs_15"><a href="mailto:ruhoya.ina@gmail.com">info@ruhoya.id</a></p>
                                                 </li>
                                             </ul>
                                         </div>

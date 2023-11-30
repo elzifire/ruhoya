@@ -62,7 +62,7 @@
                     </li>
                     <li>
                         <div class="icon-box"><i class="fas fa-envelope"></i></div>
-                        <p>Email: <a href="tel:info@example.com">info@example.com</a></p>
+                        <p>Email: <a href="tel:ruhoya.ina@gmail.com">ruhoya.ina@gmail.com</a></p>
                     </li>
                 </ul>
             </div>
@@ -142,9 +142,9 @@
         <div class="contact-info">
             <h4>Contact Info</h4>
             <ul>
-                <li>Chicago 12, Melborne City, USA</li>
+                <li>Center for Plant Conservation-Bogor Botanical Gardens, Indonesian Institute of Sciences. Jln. Ir. H. Juanda No. 13 Bogor 16122</li>
                 <li><a href="tel:+8801682648101">+88 01682648101</a></li>
-                <li><a href="mailto:info@example.com">info@example.com</a></li>
+                <li><a href="mailto:ruhoya.ina@gmail.com">ruhoya.ina@gmail.com</a></li>
             </ul>
         </div>
         <div class="social-links">

@@ -215,8 +215,8 @@
                     </div>
                 </div>
                 <div class="items-container row clearfix">
-                    @foreach (\App\Models\Hoya::all() as $hoya)    
-                    @foreach ($hoya->hoyaImages as $hoyaImage)
+                    @foreach (\App\Models\Hoya::limit(3)->get() as $hoya)    
+                    @foreach ($hoya->hoyaImages->take(1) as $hoyaImage)
                         <div class="col-lg-4 col-md-6 col-sm-12 masonry-item small-column all product urban maintanance">
                             <div class="project-block-one">
                                 <div class="inner-box p_relative d_block centred mb_30">
@@ -229,7 +229,7 @@
                                                 <i class="fas fa-seedling"></i>
                                             </div>
                                             <h3 class="fs_22 color_white fw_medium mb_11 d_block tran_5">
-                                                <a href="project-details.html" class="d_iblock color_white">{{$hoya->name}}</a>
+                                                <a href="{{url('database/' . $hoya->id)}}" class="d_iblock color_white">{{$hoya->name}}</a>
                                             </h3>
                                         </div>
                                     </div>
