@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function loadHoya()
     {
         $response = new ResponseModel();
-        $data = Hoya::all();
+        $data = Hoya::has("hoyaSpreads")->get();
 
         $response->data = $data;
         

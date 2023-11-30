@@ -142,7 +142,7 @@
                     response.data.forEach(function(hoya) {
                         hoya.hoya_spreads.forEach(function(point) {
                             var m = new L.marker([point.latitude, point.longitude]);
-                            m.bindPopup(createPopup(hoya.name, hoya.etymology, `{{url('uploads')}}/${hoya.hoya_images[0].image}`));
+                            m.bindPopup(createPopup(hoya.name, hoya.etymology, hoya.hoya_images[0] ? `{{url('uploads')}}/${hoya.hoya_images[0].image}` : ""));
 
                             markers.addLayer(m);
                             markers.addTo(map)

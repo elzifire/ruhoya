@@ -17,6 +17,11 @@ class HoyaSpread extends Model
         "description",
     ];
 
+    protected $casts = [
+        'latitude' => 'float',
+        'longitude' => 'float',
+    ];
+
     public static function rules()
     {
         return [
