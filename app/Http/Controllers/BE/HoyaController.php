@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BE;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Controller;
 
@@ -96,6 +97,13 @@ class HoyaController extends Controller
 
     public function store(Request $request)
     {
+        if (Storage::exists('hoya.json') === false) {
+            Storage::put('hoya.json', json_encode([]));
+        }
+
+        $contents = Storage::get('hoya.json');
+        $contents = json_decode($contents);
+
         $response = new ResponseModel(HttpStatus::SUCCESS, HttpMessage::SUCCESS_INSERT);
 
         $payload = $request->all();
@@ -184,6 +192,9 @@ class HoyaController extends Controller
                 ]);
             }
 
+            array_push($contents, collect($data)->except(["hoya_images", "hoya_spreads", "hoya_sequences"])->toArray());
+            Storage::put("hoya.json", json_encode($contents));
+
     		DB::commit();
 
             return response()->json($response);
@@ -212,6 +223,13 @@ class HoyaController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (Storage::exists('hoya.json') === false) {
+            Storage::put('hoya.json', json_encode([]));
+        }
+
+        $contents = Storage::get('hoya.json');
+        $contents = json_decode($contents);
+
         $response = new ResponseModel(HttpStatus::SUCCESS, HttpMessage::SUCCESS_UPDATE);
 
         $payload = $request->all();
@@ -338,6 +356,18 @@ class HoyaController extends Controller
             HoyaSpread::where("hoya_id", $hoyaId)->whereNotIn("id", $hoyaSpreadIds)->delete();
             HoyaSequence::where("hoya_id", $hoyaId)->whereNotIn("id", $hoyaSequenceIds)->delete();
 
+            $contentIndex = collect($contents)->search(function($content) use ($id) {
+                return $content->id == $id;
+            });
+
+            if ($contentIndex !== false) {
+                $contents[$contentIndex] = collect($data)->except(["hoya_images", "hoya_spreads", "hoya_sequences"])->toArray();
+            } else {
+                $contents[] = collect($data)->except(["hoya_images", "hoya_spreads", "hoya_sequences"])->toArray();
+            }
+
+            Storage::put("hoya.json", json_encode($contents));
+            
     		DB::commit();
             $response->data = $data;
 

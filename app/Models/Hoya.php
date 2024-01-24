@@ -43,7 +43,7 @@ class Hoya extends Model
         "shoots",
     ];
 
-    public $with = ["hoyaImages", "hoyaSpreads", "hoyaSequences"];
+    public $with = ["hoyaImages"];
 
     public static function rules()
     {

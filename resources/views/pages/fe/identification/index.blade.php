@@ -6,46 +6,22 @@
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="search-widget sidebar-widget p_relative d_block mb_50 pt_30 pb_40 b_radius_5">
-                    <div class="widget-title p_relative d_block mb_20">
+                    <div class="widget-title p_relative d_block mb_70">
                         <h3 class="fs_30 lh_40">Identifikasi</h3>
+                        <p>Masukan ciri-ciri Hoya yang Anda cari, dan kami akan menampilkan daftar Hoya yang sesuai dengan kriteria yang Anda berikan</p>
                     </div>
                     <div class="search-inner">
-                        <form action="shop.html" method="post" class="default-form">
+                        <form action="{{url('identifikasi')}}" method="get" class="default-form">
                             <div class="row">
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Habitus</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Tanaman Merambat</option>
-                                                <option>Tanaman Bergantung</option>
-                                                <option>Tanaman Memanjat</option>
-                                                <option>Tanaman Semak</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Akar</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Akar 1</option>
-                                                <option>Akar 2</option>
-                                                <option>Akar 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
                                         <label class="form-label">Batang</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Mempelintir</option>
-                                                <option>Berkulit</option>
-                                                <option>Bergelombang</option>
-                                                <option>Berduri</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="stem">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Batang as $item)
+                                                    <option value="{{$item->value}}" {{request('stem') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -54,102 +30,89 @@
                                     <div class="form-group">
                                         <label class="form-label">Daun</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Lonjong</option>
-                                                <option>Oval</option>
-                                                <option>Bulat</option>
-                                                <option>Berbentuk Hati</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="leaves">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Daun as $item)
+                                                    <option value="{{$item->value}}" {{request('leaves') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Perbungaan</label>
+                                        <label class="form-label">Bentuk Bunga</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Perbungaan Berkelompok</option>
-                                                <option>Perbungaan Bintang</option>
-                                                <option>Perbungaan Berwarna-warni</option>
-                                                <option>Perbungaan Berbau Wangi</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="flowers">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Bentuk_Bunga as $item)
+                                                    <option value="{{$item->value}}" {{request('flowers') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Kelopak Bunga</label>
+                                        <label class="form-label">Kuncup Bunga</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Mahkota</option>
-                                                <option>Bintang</option>
-                                                <option>Lonjong</option>
-                                                <option>Tepal</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_buds">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Kuncup_Bunga as $item)
+                                                    <option value="{{$item->value}}" {{request('flower_buds') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Mahkota</label>
+                                        <label class="form-label">Ukuran Bunga</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Bergelombang</option>
-                                                <option>Menyerupai Bintang</option>
-                                                <option>Berlekuk-lekuk</option>
-                                                <option>Berbentuk Gantung</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_size">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Ukuran_Bunga as $item)
+                                                    <option value="{{$item->value}}" {{request('flower_size') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Korona</label>
+                                        <label class="form-label">Warna Bunga</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Mencolok</option>
-                                                <option>Lembut</option>
-                                                <option>Berwarna Kontras</option>
-                                                <option>Berbentuk Menyerupai Telinga</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_colors">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Warna_Bunga as $item)
+                                                    <option value="{{$item->value}}" {{request('flower_colors') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Polinia</label>
+                                        <label class="form-label">Akar</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Berkumpul di Tengah Bunga</option>
-                                                <option>Tersembunyi di Tepi Mahkota</option>
-                                                <option>Menempel pada Stigma</option>
-                                                <option>Benang Penghubung Panjang</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Gynostegium</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Gynostegium Berekor Pendek</option>
-                                                <option>Serbuk Sari Menggantung</option>
-                                                <option>Berbentuk Tergelincir</option>
-                                                <option>Jumbai Serbuk Sari</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="roots">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Akar as $item)
+                                                    <option value="{{$item->value}}" {{request('roots') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8 mb-4">
                                     <div class="form-group">
-                                        <label class="form-label">Bakal Buah</label>
+                                        <label class="form-label">Tunas</label>
                                         <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1">
-                                                <option>Bulat</option>
-                                                <option>Oval</option>
-                                                <option>Berlekuk</option>
-                                                <option>Berduri</option>
+                                            <select class="selectmenu w-100" id="ui-id-1" name="shoots">
+                                                <option value="" selected></option>
+                                                @foreach ($Morfologi_Tunas as $item)
+                                                    <option value="{{$item->value}}" {{request('shoots') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -164,280 +127,61 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-12 col-md-12 col-sm-12">
+            @if (isset($results))    
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="our-shop">
-                    <div class="item-shorting p_relative d_block mb_50 clearfix">
-                        <div class="left-column pull-left clearfix">
-                            <div class="text"><h6 class="fs_15 lh_45">Menampilkan 1–12 dari 50 Hasil</h6></div>
-                        </div>
-                    </div>
                     <div class="auto-container">
                         <div class="row clearfix">
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Campanulata.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Campanulata</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
+                            @forelse ($results as $result)
+                                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                                    <div
+                                        class="service-block-one wow fadeInUp animated"
+                                        data-wow-delay="00ms"
+                                        data-wow-duration="1500ms"
+                                    >
+                                        <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
+                                            <div class="image-box p_relative d_block mb_45">
+                                                <figure class="image p_relative d_block img_hover_1">
+                                                    @if (isset($result->hoyaImages[0]))
+                                                        <img src="{{url('uploads/' . $result->hoyaImages[0]->image)}}" />
+                                                        @if (!empty($result->hoyaImages[0]->photographer))
+                                                            <small class="text-muted"><i class="fas fa-camera"></i> {{$result->hoyaImages[0]->photographer}}</small>
+                                                        @endif
+                                                    @else
+                                                        <img src="{{asset("FE/images/not_found.jpg")}}" />
+                                                    @endif
+                                                </figure>
+                                            </div>
+                                            <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
+                                                <h3 class="p_relative d_block fs_22 fw_medium mb_17">
+                                                    <a href="{{url('database/' . $result->id)}}" target="_blank" class="d_iblock">Hoya {{$result->name}}</a>
+                                                </h3>
+                                                <p class="mb_17 lh_26">{{$result->origin}}</p>
+                                                <div class="link-box p_relative">
+                                                    <a href="{{url('database/' . $result->id)}}" target="_blank" class="link-btn d_iblock"
+                                                        ><i class="far fa-long-arrow-right fs_20"></i
+                                                    ></a>
+                                                    <a href="{{url('database/' . $result->id)}}" target="_blank" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
+                                                        >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
+                                                    ></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/kerrii.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Kerrii</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Ocultata.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Ocultata</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Rigidifolia.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Rigidifolia</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Campanulata.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Campanulata</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/kerrii.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Kerrii</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Ocultata.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Ocultata</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Rigidifolia.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Rigidifolia</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-12 service-block">
-                                <div
-                                    class="service-block-one wow fadeInUp animated"
-                                    data-wow-delay="00ms"
-                                    data-wow-duration="1500ms"
-                                >
-                                    <div class="inner-box p_relative d_block bg_white b_radius_5 b_shadow_6 tran_5 mb_30">
-                                        <div class="image-box p_relative d_block mb_45">
-                                            <figure class="image p_relative d_block img_hover_1">
-                                                <img src="assets/images/hoya/Campanulata.JPG" alt="" />
-                                            </figure>
-                                        </div>
-                                        <div class="lower-content p_relative d_block pl_20 pr_20 pb_40">
-                                            <h3 class="p_relative d_block fs_22 fw_medium mb_17">
-                                                <a href="detail.html" class="d_iblock">Hoya Campanulata</a>
-                                            </h3>
-                                            <p class="mb_17 lh_26">Kalimantan Utara</p>
-                                            <div class="link-box p_relative">
-                                                <a href="detail.html" class="link-btn d_iblock"
-                                                    ><i class="far fa-long-arrow-right fs_20"></i
-                                                ></a>
-                                                <a href="detail.html" class="overlay-btn fs_16 p_absolute fw_medium d_iblock"
-                                                    >Detail<i class="far fa-long-arrow-right p_absolute fs_20"></i
-                                                ></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @empty
+                                <h6 class="text-center">Tidak ditemukan data Hoya</h6>
+                            @endforelse
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ $results->links() }}
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -446,6 +190,16 @@
     <link href="{{asset('FE/css/jquery-ui.css')}}" rel="stylesheet" />
     <link href="{{asset('FE/css/nice-select.css')}}" rel="stylesheet" />
     <style>
+        .pagination li a {
+            padding: 0 0.75rem !important;
+            width: 100%;
+            min-width: 50px;
+        }
+
+        .page-item.active .page-link {
+            background-color: #2f7955 !important;
+        }
+
         .search-btn {
             top: 0px;
             right: 0px;
