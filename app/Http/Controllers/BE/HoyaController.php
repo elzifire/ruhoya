@@ -16,6 +16,8 @@ use App\Models\Hoya as Model;
 use App\Models\HoyaImage;
 use App\Models\HoyaSpread;
 use App\Models\HoyaSequence;
+use App\Models\HoyaMorfology;
+use App\Models\Morfology;
 use App\Models\Enumeration;
 
 use App\Exports\HoyaExport;
@@ -85,14 +87,15 @@ class HoyaController extends Controller
     public function create()
     {
         $action = url('admin/hoya/store');
-        $deps   = [];
         $benefits   = Enumeration::where("key", "Benefit")->get();
         $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
+        $morfologies    = Morfology::get();
+        $morfologies    = $morfologies->map(function($morfology) {
+            $morfology->options = Enumeration::where("key", "Morfologi_" . $morfology->slug)->get();
+            return $morfology;
+        });
 
-        foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
-            $deps[$enum] = Enumeration::where("key", $enum)->get();
-
-        return view("pages.be.hoya.form", compact("action", "deps", "benefits", "dnaTypes"));
+        return view("pages.be.hoya.form", compact("action", "morfologies", "benefits", "dnaTypes"));
     }
 
     public function store(Request $request)
@@ -121,9 +124,10 @@ class HoyaController extends Controller
             $hoyaImages     = $payload["hoya_images"] ?? [];
             $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
             $hoyaSequences  = $payload["hoya_sequences"] ?? [];
+            $hoyaMorfologies    = $payload["morfology"] ?? [];
             $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
-            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"]);
+            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"], $payload["morfology"]);
 
             $data = Model::create($payload);
             $hoyaId = $data->id;
@@ -134,6 +138,13 @@ class HoyaController extends Controller
             $response->data->hoya_images    = [];
             $response->data->hoya_spreads   = [];
             $response->data->hoya_sequences   = [];
+
+            foreach ($hoyaMorfologies as $key => $morfology) {
+                HoyaMorfology::updateOrCreate(
+                    ["hoya_id" => $hoyaId, "morfology_id" => $morfology["id"]],
+                    ["hoya_id" => $hoyaId, "morfology_id" => $morfology["id"], "value" => $morfology["value"]]
+                );
+            }
 
             foreach ($hoyaImages as $key => $hoyaImage) {
                 $validator = Validator::make($hoyaImage, HoyaImage::rules());
@@ -207,18 +218,21 @@ class HoyaController extends Controller
         }
     
     }
+
     public function edit($id)
     {
         $action = url('admin/hoya/update/' . $id);
         $data   = Model::findOrFail($id);
-        $deps   = [];
         $benefits   = Enumeration::where("key", "Benefit")->get();
         $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
 
-        foreach (Model::ENUM_MORFOLOGY_KEYS as $key => $enum)
-            $deps[$enum] = Enumeration::where("key", $enum)->orderBy("value", "ASC")->get();
+        $morfologies    = Morfology::get();
+        $morfologies    = $morfologies->map(function($morfology) {
+            $morfology->options = Enumeration::where("key", "Morfologi_" . $morfology->slug)->get();
+            return $morfology;
+        });
 
-        return view("pages.be.hoya.form", compact("action", "data", "deps", "benefits", "dnaTypes"));
+        return view("pages.be.hoya.form", compact("action", "data", "morfologies", "benefits", "dnaTypes"));
     }
 
     public function update(Request $request, $id)
@@ -247,9 +261,10 @@ class HoyaController extends Controller
             $hoyaImages     = $payload["hoya_images"] ?? [];
             $hoyaSpreads    = $payload["hoya_spreads"] ?? [];
             $hoyaSequences  = $payload["hoya_sequences"] ?? [];
+            $hoyaMorfologies    = $payload["morfology"] ?? [];
             $payload["benefit"] = implode(",", $payload["benefit"] ?? []);
 
-            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"]);
+            unset($payload["hoya_images"], $payload["hoya_spreads"], $payload["hoya_sequences"], $payload["morfology"]);
 
             $data   = Model::findOrFail($id);
             $data->update($payload);
@@ -265,6 +280,13 @@ class HoyaController extends Controller
             $hoyaImageIds   = [];
             $hoyaSpreadIds  = [];
             $hoyaSequenceIds  = [];
+
+            foreach ($hoyaMorfologies as $key => $morfology) {
+                HoyaMorfology::updateOrCreate(
+                    ["hoya_id" => $hoyaId, "morfology_id" => $morfology["id"]],
+                    ["hoya_id" => $hoyaId, "morfology_id" => $morfology["id"], "value" => $morfology["value"]]
+                );
+            }
 
             foreach ($hoyaImages as $key => $hoyaImage) {
                 $validator = Validator::make($hoyaImage, HoyaImage::rules(true));

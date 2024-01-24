@@ -52,78 +52,29 @@
     <div class="mb-3">
         <h4 class="border-bottom border-4 border-primary pb-2 mb-4 mt-4">Morfologi</h4>
         <div class="row">
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="stem" class="form-label">Batang</label>
-                <select name="stem" id="stem" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Batang"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['stem'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="leaves" class="form-label">Daun</label>
-                <select name="leaves" id="leaves" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Daun"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['leaves'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="flowers" class="form-label">Bentuk Bunga</label>
-                <select name="flowers" id="flowers" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Bentuk_Bunga"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['flowers'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="flower_buds" class="form-label">Kuncup Bunga</label>
-                <select name="flower_buds" id="flower_buds" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Kuncup_Bunga"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_buds'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="flower_size" class="form-label">Ukuran Bunga</label>
-                <select name="flower_size" id="flower_size" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Ukuran_Bunga"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_size'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="flower_colors" class="form-label">Warna Bunga</label>
-                <select name="flower_colors" id="flower_colors" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Warna_Bunga"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['flower_colors'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="roots" class="form-label">Akar</label>
-                <select name="roots" id="roots" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Akar"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['roots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-6 col-sm-12 mb-3">
-                <label for="shoots" class="form-label">Tunas</label>
-                <select name="shoots" id="shoots" class="form-select">
-                    <option value="" selected>-- Pilih --</option>
-                    @foreach ($deps["Morfologi_Tunas"] as $item)
-                        <option value="{{$item->value}}" {{(isset($data) && $data['shoots'] === $item->value) ? "selected" : ""}}>{{$item->value}}</option>
-                    @endforeach
-                </select>
-            </div>
+            @foreach ($morfologies as $index => $morfology)
+                <div class="col-md-6 col-sm-12 mb-3">
+                    <label class="form-label d-block">{{$morfology->name}}</label>
+                    <input type="hidden" name="morfology[{{$index}}][id]" value="{{$morfology->id}}">
+                    @if ($morfology->yes_no_question == 0)
+                        <select name="morfology[{{$index}}][value]" class="form-select">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach ($morfology->options as $option)
+                                <option value="{{$option->value}}" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value === $option->value) ? "selected" : ""}}>{{$option->value}}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="morfology[{{$index}}][value]" id="radio_yes" value="1" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value == 1) ? "checked" : ""}}>
+                            <label class="form-check-label" for="radio_yes">Ya</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="morfology[{{$index}}][value]" id="radio_no" value="0" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value == 0) ? "checked" : ""}}>
+                            <label class="form-check-label" for="radio_no">Tidak</label>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
         </div>
     </div>
     <div class="mb-3">

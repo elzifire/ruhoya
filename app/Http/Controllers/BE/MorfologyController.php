@@ -85,7 +85,7 @@ class MorfologyController extends Controller
             unset($payload["options"]);
 
             $payload["slug"] = Str::snake($payload["name"]);
-            $payload["yes_no_question"] = (isset($payload["yes_no_question"]) || !empty($payload["yes_no_question"])) ? $payload["yes_no_question"] : 0;
+            $payload["yes_no_question"] = (isset($payload["yes_no_question"]) || !empty($payload["yes_no_question"])) ? 1 : 0;
             $data = Model::create($payload);
             
             foreach ($options as $key => $option) {

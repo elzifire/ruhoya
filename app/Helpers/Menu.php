@@ -28,7 +28,16 @@ class Menu
             [
                 "title" => "Hoya",
                 "url"   => "admin/hoya",
-                "icon"  => "bx bx-leaf"
+                "icon"  => "bx bx-spa"
+            ],
+            [
+                "title" => "MASTER DATA",
+                "url"   => null,
+            ],
+            [
+                "title" => "Enumeration",
+                "url"   => "admin/enumeration",
+                "icon"  => "bx bx-collection"
             ],
             [
                 "title" => "Asosiasi Serangga",
@@ -39,15 +48,6 @@ class Menu
                 "title" => "Hama",
                 "url"   => "admin/pest",
                 "icon"  => "bx bx-spray-can"
-            ],
-            [
-                "title" => "MASTER DATA",
-                "url"   => null,
-            ],
-            [
-                "title" => "Enumeration",
-                "url"   => "admin/enumeration",
-                "icon"  => "bx bx-collection"
             ],
             [
                 "title" => "Slider",
