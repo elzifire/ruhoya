@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('collaborators', function (Blueprint $table) {
-        //     $table->after("image", function (Blueprint $table) {
-        //         $table->integer("sequence")->default(999);
-        //     });
-        // });
+        Schema::create('morfologies', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->string("slug");
+            $table->integer("yes_no_question");
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('morfologies');
     }
 };

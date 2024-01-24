@@ -21,6 +21,11 @@ class Menu
                 "url"   => null,
             ],
             [
+                "title" => "Morfologi",
+                "url"   => "admin/morfology",
+                "icon"  => "bx bx-leaf"
+            ],
+            [
                 "title" => "Hoya",
                 "url"   => "admin/hoya",
                 "icon"  => "bx bx-leaf"

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename("teams", "collaborators");
-        Schema::table("collaborators", function (Blueprint $table) {
-            $table->renameColumn("title", "institute");
-            $table->after("title", function (Blueprint $table) {
-                $table->string("contribution")->nullable();
-            });
-        });
+        // Schema::rename("teams", "collaborators");
+        // Schema::table("collaborators", function (Blueprint $table) {
+        //     $table->renameColumn("title", "institute");
+        //     $table->after("title", function (Blueprint $table) {
+        //         $table->string("contribution")->nullable();
+        //     });
+        // });
     }
 
     /**

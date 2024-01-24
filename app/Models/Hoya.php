@@ -73,4 +73,8 @@ class Hoya extends Model
     public function hoyaSequences() {
         return $this->hasMany(HoyaSequence::class);
     }
+    
+    public function hoyaMorfologies() {
+        return $this->hasMany(HoyaMorfology::class);
+    }
 }

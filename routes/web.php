@@ -68,6 +68,14 @@ Route::middleware("auth")->group(function() {
         Route::post("/pest/update/{id}", "BE\PestController@update");
         Route::get("/pest/delete/{id}", "BE\PestController@destroy");
     
+        Route::get("/morfology", "BE\MorfologyController@index");
+        Route::get("/morfology/api", "BE\MorfologyController@api");
+        Route::get("/morfology/create", "BE\MorfologyController@create");
+        Route::post("/morfology/store", "BE\MorfologyController@store");
+        Route::get("/morfology/edit/{id}", "BE\MorfologyController@edit");
+        Route::post("/morfology/update/{id}", "BE\MorfologyController@update");
+        Route::get("/morfology/delete/{id}", "BE\MorfologyController@destroy");
+    
         Route::get("/enumeration", "BE\EnumerationController@index");
         Route::get("/enumeration/api", "BE\EnumerationController@api");
         Route::get("/enumeration/create", "BE\EnumerationController@create");
