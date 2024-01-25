@@ -35,11 +35,6 @@ class Menu
                 "url"   => null,
             ],
             [
-                "title" => "Enumeration",
-                "url"   => "admin/enumeration",
-                "icon"  => "bx bx-collection"
-            ],
-            [
                 "title" => "Asosiasi Serangga",
                 "url"   => "admin/insect-association",
                 "icon"  => "bx bx-bug"
@@ -48,6 +43,11 @@ class Menu
                 "title" => "Hama",
                 "url"   => "admin/pest",
                 "icon"  => "bx bx-spray-can"
+            ],
+            [
+                "title" => "Enumeration",
+                "url"   => "admin/enumeration",
+                "icon"  => "bx bx-collection"
             ],
             [
                 "title" => "Slider",
