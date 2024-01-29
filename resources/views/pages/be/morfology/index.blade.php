@@ -35,9 +35,8 @@
                     <table id="datatable" class="table table-bordered nowrap table-striped align-middle" style="width:100%">
                         <thead class="table-primary">
                             <tr>
+                                <th>Grup</th>
                                 <th>Nama</th>
-                                <th>Slug</th>
-                                <th>Pertanyaan Ya/Tidak</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -66,9 +65,8 @@
                 processing: true,
                 serverSide: true,
                 columns: [
+                    {data: 'group', name: 'group'},
                     {data: 'name', name: 'name'},
-                    {data: 'slug', name: 'slug'},
-                    {data: 'yes_no_question', name: 'yes_no_question'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });

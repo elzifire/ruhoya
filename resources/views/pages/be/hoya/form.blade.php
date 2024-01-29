@@ -2,7 +2,10 @@
     {{csrf_field()}}
     <div class="mb-3">
         <label for="name" class="form-label">Nama</label>
-        <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" {{--required --}}>
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon1">Hoya</span>
+            <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" {{--required --}}>
+        </div>
     </div>
     <div class="mb-3">
         <label for="etymology" class="form-label">Etimologi</label>
@@ -11,11 +14,11 @@
     <div class="mb-3">
         <div class="row">
             <div class="col">
-                <label for="origin" class="form-label">Daerah Asal</label>
+                <label for="origin" class="form-label">Daerah Pertama Ditemukan</label>
                 <input type="text" class="form-control" name="origin" value="{{isset($data) ? $data['origin'] : ''}}" {{--required --}}>
             </div>
             <div class="col">
-                <label for="local_name" class="form-label">Nama Daerah</label>
+                <label for="local_name" class="form-label">Nama Lokal</label>
                 <input type="text" class="form-control" name="local_name" value="{{isset($data) ? $data['local_name'] : ''}}" {{--required --}}>
             </div>
         </div>
@@ -52,28 +55,24 @@
     <div class="mb-3">
         <h4 class="border-bottom border-4 border-primary pb-2 mb-4 mt-4">Morfologi</h4>
         <div class="row">
-            @foreach ($morfologies as $index => $morfology)
-                <div class="col-md-6 col-sm-12 mb-3">
-                    <label class="form-label d-block">{{$morfology->name}}</label>
-                    <input type="hidden" name="morfology[{{$index}}][id]" value="{{$morfology->id}}">
-                    @if ($morfology->yes_no_question == 0)
+            @php $index = 0; @endphp
+            @foreach ($morfologies as $key => $group)
+                <div class="col-12">
+                    <h5 class="border-bottom border-2 border-primary pb-2 mb-2">{{$key}}</h5>
+                </div>
+                @foreach ($group as $rowIndex => $morfology)
+                    <div class="col-sm-12 mb-3 {{(count($group) === 1 || (count($group) % 2 === 1 && count($group) - 1 === $rowIndex)) ? "col-md-12" : "col-md-6"}}">
+                        <label class="form-label d-block">{{$morfology->name}}</label>
+                        <input type="hidden" name="morfology[{{$index}}][id]" value="{{$morfology->id}}">
                         <select name="morfology[{{$index}}][value]" class="form-select">
-                            <option value="" selected>-- Pilih --</option>
+                            <option value="" selected></option>
                             @foreach ($morfology->options as $option)
                                 <option value="{{$option->value}}" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value === $option->value) ? "selected" : ""}}>{{$option->value}}</option>
                             @endforeach
                         </select>
-                    @else
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="morfology[{{$index}}][value]" id="radio_yes" value="1" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value == 1) ? "checked" : ""}}>
-                            <label class="form-check-label" for="radio_yes">Ya</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="morfology[{{$index}}][value]" id="radio_no" value="0" {{(isset($data) && $data->hoyaMorfologies()->where("morfology_id", $morfology->id)->first()?->value == 0) ? "checked" : ""}}>
-                            <label class="form-check-label" for="radio_no">Tidak</label>
-                        </div>
-                    @endif
-                </div>
+                    </div>
+                    @php $index += 1; @endphp
+                @endforeach
             @endforeach
         </div>
     </div>

@@ -16,6 +16,8 @@ class HoyaMorfology extends Model
         "value",
     ];
 
+    protected $with = ["morfology"];
+
     public static function rules()
     {
         return [
@@ -26,6 +28,6 @@ class HoyaMorfology extends Model
     }
 
     public function morfology() {
-        return $this->hasOne(Morfology::class);
+        return $this->belongsTo(Morfology::class);
     }
 }

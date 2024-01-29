@@ -6,21 +6,7 @@
         <div class="auto-container">
             <div class="top-inner clearfix">
                 <div class="left-column pull-left">
-                    <ul class="social-links clearfix">
-                        <li><p>Ikuti Kami:</p></li>
-                        <li>
-                            <a href="{{url('/')}}"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{url('/')}}"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{url('/')}}"><i class="fab fa-linkedin-in"></i></a>
-                        </li>
-                        <li>
-                            <a href="{{url('/')}}"><i class="fab fa-pinterest-p"></i></a>
-                        </li>
-                    </ul>
+                    <ul class="social-links clearfix"></ul>
                 </div>
                 <div class="right-column pull-right">
                     <ul class="info-box clearfix">
@@ -56,7 +42,7 @@
                             <li><a href="{{url('/')}}">Home</a></li>
                             <li><a href="{{url('/tentang')}}">Tentang</a></li>
                             <li><a href="{{url('/galeri')}}">Galeri</a></li>
-                            {{-- <li><a href="{{url('/identifikasi')}}">Identifikasi</a></li> --}}
+                            <li><a href="{{url('/identifikasi')}}">Identifikasi</a></li>
                             <li><a href="{{url('/database')}}">Database Hoya</a></li>
                             {{-- <li><a href="{{url('/tim-ahli')}}">Tim Ahli</a></li> --}}
                         </ul>
@@ -104,30 +90,14 @@
         </div>
         <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
         <div class="contact-info">
-            <h4>Contact Info</h4>
+            <h4>Kontak</h4>
             <ul>
                 <li>Center for Plant Conservation-Bogor Botanical Gardens, Indonesian Institute of Sciences. Jln. Ir. H. Juanda No. 13 Bogor 16122</li>
                 <li><a href="mailto:ruhoya.ina@gmail.com">ruhoya.ina@gmail.com</a></li>
             </ul>
         </div>
         <div class="social-links">
-            <ul class="clearfix">
-                <li>
-                    <a href="{{url('/')}}"><span class="fab fa-twitter"></span></a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}"><span class="fab fa-facebook-square"></span></a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}"><span class="fab fa-pinterest-p"></span></a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}"><span class="fab fa-instagram"></span></a>
-                </li>
-                <li>
-                    <a href="{{url('/')}}"><span class="fab fa-youtube"></span></a>
-                </li>
-            </ul>
+            <ul class="clearfix"></ul>
         </div>
     </nav>
 </div>

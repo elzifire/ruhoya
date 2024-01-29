@@ -27,26 +27,6 @@
                                 </p>
                             </div>
                             <ul class="social-links clearfix mb-4">
-                                <li class="p_relative d_iblock float_left mr_10">
-                                    <a href="{{url('/')}}" class="d_iblock color_white hov_bg b_radius_5"
-                                    ><i class="fab fa-facebook-f"></i
-                                        ></a>
-                                    </li>
-                                    <li class="p_relative d_iblock float_left mr_10">
-                                        <a href="{{url('/')}}" class="d_iblock color_white hov_bg b_radius_5"
-                                        ><i class="fab fa-twitter"></i
-                                            ></a>
-                                        </li>
-                                        <li class="p_relative d_iblock float_left mr_10">
-                                            <a href="{{url('/')}}" class="d_iblock color_white hov_bg b_radius_5"
-                                            ><i class="fab fa-vimeo-v"></i
-                                                ></a>
-                                            </li>
-                                            <li class="p_relative d_iblock float_left">
-                                                <a href="{{url('/')}}" class="d_iblock color_white hov_bg b_radius_5"
-                                                ><i class="fab fa-google-plus-g"></i
-                                                    ></a>
-                                                </li>
                                             </ul>
                                             <div class="d-flex align-items-center flex-wrap" style="gap: 1.25rem">
                                                 <div class="d-flex align-items-center flex-wrap" style="gap: 1.25rem">
@@ -94,7 +74,7 @@
                         <div class="auto-container">
                             <div class="bottom-inner clearfix">
                                 <div class="copyright pull-left">
-                                    <p class="fs_15"><a href="{{url('/')}}">RUHOYA</a> &copy; 2023 All Right Reserved.</p>
+                                    <p class="fs_15"><a href="{{url('/')}}">RUHOYA</a> &copy; {{date('Y')}} All Right Reserved.</p>
                                 </div>
                             </div>
                         </div>

@@ -62,7 +62,9 @@ class MorfologyController extends Controller
     public function create()
     {
         $action = url('admin/morfology/store');
-        return view("pages.be.morfology.form", compact("action"));
+        $groups = Enumeration::where("key", "Grup_Morfologi")->get();
+
+        return view("pages.be.morfology.form", compact("action", "groups"));
     }
 
     public function store(Request $request)
@@ -112,10 +114,11 @@ class MorfologyController extends Controller
     public function edit($id)
     {
         $action = url('admin/morfology/update/' . $id);
+        $groups = Enumeration::where("key", "Grup_Morfologi")->get();
         $data   = Model::findOrFail($id);
         $data->options = Enumeration::where("key", "Morfologi_" . Str::snake($data->name))->get();
 
-        return view("pages.be.morfology.form", compact("action", "data"));
+        return view("pages.be.morfology.form", compact("action", "data", "groups"));
     }
 
     public function update(Request $request, $id)

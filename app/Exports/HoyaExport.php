@@ -30,7 +30,7 @@ class HoyaExport implements FromCollection, WithStyles, WithColumnFormatting, Wi
             "Nama",
             "Nama Lokal",
             "Author",
-            "Daerah Asal",
+            "Daerah Pertama Ditemukan",
             "Daerah Sebaran",
             "Informasi Tipe",
             "Publikasi",

@@ -38,7 +38,7 @@ class HoyaController extends Controller
 
     public function api(Request $request)
     {
-        $model = Model::orderBy("created_at", "DESC");
+        $model = Model::with("hoyaMorfologies")->orderBy("created_at", "DESC");
         return DataTables::eloquent($model)
                 ->filter(function ($query) use ($request) {
                     $filterable = [
@@ -73,6 +73,11 @@ class HoyaController extends Controller
                 ->addColumn('name', function($data) {
                     return "Hoya <i>{$data->name}</i>, <b>{$data->author}</b>";
                 })
+                ->addColumn('morfology_created', function($data) {
+                    $morfologyCount = Morfology::count();
+                    $count = $data->hoyaMorfologies()->where("value", "!=", null)->count();
+                    return "<h5><span class='badge text-bg-success'>{$count}/{$morfologyCount}</span></h5>";
+                })
                 ->addColumn('action', function($data) {
                     return view("components.action", [
                         "edit"      => url("admin/hoya/edit/".$data->id),
@@ -80,7 +85,7 @@ class HoyaController extends Controller
                     ]);
                 })
                 ->smart(false)
-                ->rawColumns(['name', 'action'])
+                ->rawColumns(['name', 'action', 'morfology_created'])
                 ->make(true);
     }
 
@@ -88,12 +93,13 @@ class HoyaController extends Controller
     {
         $action = url('admin/hoya/store');
         $benefits   = Enumeration::where("key", "Benefit")->get();
-        $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();
+        $dnaTypes   = Enumeration::where("key", "DNASequenceType")->get();
         $morfologies    = Morfology::get();
         $morfologies    = $morfologies->map(function($morfology) {
-            $morfology->options = Enumeration::where("key", "Morfologi_" . $morfology->slug)->get();
+            $morfology->options = Enumeration::where("key", $morfology->yes_no_question ? "Yes_No_Question" : "Morfologi_" . $morfology->slug)->get();
             return $morfology;
-        });
+        })
+        ->groupBy("group");
 
         return view("pages.be.hoya.form", compact("action", "morfologies", "benefits", "dnaTypes"));
     }
@@ -228,9 +234,10 @@ class HoyaController extends Controller
 
         $morfologies    = Morfology::get();
         $morfologies    = $morfologies->map(function($morfology) {
-            $morfology->options = Enumeration::where("key", "Morfologi_" . $morfology->slug)->get();
+            $morfology->options = Enumeration::where("key", $morfology->yes_no_question ? "Yes_No_Question" : "Morfologi_" . $morfology->slug)->get();
             return $morfology;
-        });
+        })
+        ->groupBy("group");
 
         return view("pages.be.hoya.form", compact("action", "data", "morfologies", "benefits", "dnaTypes"));
     }

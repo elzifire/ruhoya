@@ -11,6 +11,7 @@ class Morfology extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        "group",
         "name",
         "slug",
         "yes_no_question",
@@ -19,6 +20,7 @@ class Morfology extends Model
     public static function rules()
     {
         return [
+            "group"  => "required",
             "name"  => "required",
         ];
     }

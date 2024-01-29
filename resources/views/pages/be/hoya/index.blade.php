@@ -57,7 +57,8 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Nama Lokal</th>
-                                <th>Daerah Asal</th>
+                                <th>Daerah Pertama Ditemukan</th>
+                                <th>Morfologi</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -137,6 +138,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'local_name', name: 'local_name'},
                     {data: 'origin', name: 'origin'},
+                    {data: 'morfology_created', name: 'morfology_created'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });

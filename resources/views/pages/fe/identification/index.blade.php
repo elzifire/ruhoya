@@ -8,119 +8,40 @@
                 <div class="search-widget sidebar-widget p_relative d_block mb_50 pt_30 pb_40 b_radius_5">
                     <div class="widget-title p_relative d_block mb_70">
                         <h3 class="fs_30 lh_40">Identifikasi</h3>
-                        <p>Masukan ciri-ciri Hoya yang Anda cari, dan kami akan menampilkan daftar Hoya yang sesuai dengan kriteria yang Anda berikan</p>
+                        <p>Masukan ciri-ciri Hoya yang Anda cari dan kami akan menampilkan daftar Hoya yang sesuai dengan kriteria yang Anda berikan</p>
                     </div>
                     <div class="search-inner">
                         <form action="{{url('identifikasi')}}" method="get" class="default-form">
+                            <table class="table">
+                                @foreach ($morfologies as $key => $group)
+                                    <tr>
+                                        <th colspan="2">
+                                            <h5 class="text-left font-weight-bold">{{$key}}</h5>
+                                        </th>
+                                    </tr>
+                                    @foreach ($group as $rowIndex => $morfology)
+                                        <tr>
+                                            <td><p class="text-left font-weight-bold" style="color: #000">{{$morfology->name}}</p></td>
+                                            <td>
+                                                @foreach ($morfology->options as $optIndex => $option)
+                                                    <label for="{{$morfology->slug}}-{{$optIndex}}" class="d-block text-left" style="color: #000">
+                                                        <input type="radio" name="{{$morfology->slug}}" id="{{$morfology->slug}}-{{$optIndex}}" class="form-radio" value="{{$option->value}}" {{request($morfology->slug) && request($morfology->slug) === $option->value ? "checked" : ""}}>
+                                                        {{$option->value}}
+                                                    </label>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            </table>
                             <div class="row">
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Batang</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="stem">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Batang as $item)
-                                                    <option value="{{$item->value}}" {{request('stem') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Daun</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="leaves">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Daun as $item)
-                                                    <option value="{{$item->value}}" {{request('leaves') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Bentuk Bunga</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="flowers">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Bentuk_Bunga as $item)
-                                                    <option value="{{$item->value}}" {{request('flowers') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Kuncup Bunga</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_buds">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Kuncup_Bunga as $item)
-                                                    <option value="{{$item->value}}" {{request('flower_buds') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Ukuran Bunga</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_size">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Ukuran_Bunga as $item)
-                                                    <option value="{{$item->value}}" {{request('flower_size') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Warna Bunga</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="flower_colors">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Warna_Bunga as $item)
-                                                    <option value="{{$item->value}}" {{request('flower_colors') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Akar</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="roots">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Akar as $item)
-                                                    <option value="{{$item->value}}" {{request('roots') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-8 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Tunas</label>
-                                        <div class="select-column select-box">
-                                            <select class="selectmenu w-100" id="ui-id-1" name="shoots">
-                                                <option value="" selected></option>
-                                                @foreach ($Morfologi_Tunas as $item)
-                                                    <option value="{{$item->value}}" {{request('shoots') == $item->value ? "selected" : ""}}>{{$item->value}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <button class="d-block theme_bg color_white centred b_radius_5 fs_16 theme-btn btn-one">
+                                <div class="col-lg-12 mb-4 text-left">
+                                    <button class="d-inline-block theme_bg color_white centred b_radius_5 fs_16 theme-btn btn-one">
                                         <i class="fas fa-search mr-2"></i> Identifikasi
                                     </button>
+                                    <a href="{{url('identifikasi')}}" class="d-inline-block centred b_radius_5 fs_16 theme-btn btn-two">
+                                        Reset
+                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -128,7 +49,7 @@
                 </div>
             </div>
             @if (isset($results))    
-            <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12" data-search-results>
                 <div class="our-shop">
                     <div class="auto-container">
                         <div class="row clearfix">
@@ -157,6 +78,7 @@
                                                     <a href="{{url('database/' . $result->id)}}" target="_blank" class="d_iblock">Hoya {{$result->name}}</a>
                                                 </h3>
                                                 <p class="mb_17 lh_26">{{$result->origin}}</p>
+                                                <p class="mb_17 lh_26">Kemiripan: <span class="font-weight-bold text-primary">{{$result->similarity * 100}}%</span></p>
                                                 <div class="link-box p_relative">
                                                     <a href="{{url('database/' . $result->id)}}" target="_blank" class="link-btn d_iblock"
                                                         ><i class="far fa-long-arrow-right fs_20"></i
@@ -211,5 +133,12 @@
 @endpush
 @push('script')
     <script src="{{asset('FE/js/product-filter.js')}}"></script>
+    @if (isset($results))
+    <script>
+        $(document).ready(function() {
+            document.querySelector("[data-search-results]").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        })
+    </script>
+    @endif
 @endpush
 @endsection
