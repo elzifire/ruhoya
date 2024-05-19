@@ -39,24 +39,19 @@ class IdentificationController extends Controller
 
     private function identification($filters, $keys)
     {
-        // $contents = Storage::get('hoya.json');
-        // $contents = json_decode($contents);
         $contents = Hoya::with("hoyaMorfologies")->get();
-
-        // if (!is_array($contents)) return null;
+        $threshold = Enumeration::where("key", "Identidication_Threshold")->firstOrFail();
 
         $filtered = [];
         foreach ($contents as $content) {
-            // $content = (array)$content;
             $similarity = 0;
             $this->checkCondition($content, $filters, $similarity);
             $content->similarity = round(($similarity / count($keys)), 2);
             
-            if ($content->similarity >= 0.15)
+            if ($content->similarity >= (float)$threshold->value)
                 $filtered[] = $content;
         }
         
-
         return $filtered;
     }
     

@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Hoya;
+use App\Models\Morfology;
 
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
@@ -15,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HoyaExport implements FromCollection, WithStyles, WithColumnFormatting, WithHeadings, WithMapping, ShouldAutoSize
+class HoyaExport implements FromCollection, WithStyles, WithHeadings, WithMapping, ShouldAutoSize
 {
     public function styles(Worksheet $sheet)
     {
@@ -26,68 +27,29 @@ class HoyaExport implements FromCollection, WithStyles, WithColumnFormatting, Wi
 
     public function headings(): array
     {
-        return [
-            "Nama",
-            "Nama Lokal",
-            "Author",
-            "Daerah Pertama Ditemukan",
-            "Daerah Sebaran",
-            "Informasi Tipe",
-            "Publikasi",
-            "Link Publikasi",
-            "Etimologi",
-            "Manfaat",
-            "Batang",
-            "Daun",
-            "Bentuk Bunga",
-            "Kuncup Bunga",
-            "Ukuran Bunga",
-            "Warna Bunga",
-            "Akar",
-            "Tunas",
-            "Sistem Reproduksi",
-            "Dibuat Pada",
-            "Diedit Pada",
-        ];
+        $hoyas = ["name"];
+        $morfologies = Morfology::get()->map(function($item) { return $item->name; })->toArray();
+
+        return array_merge($hoyas, $morfologies);
     }
 
     public function map($hoya): array
     {
-        return [
-            $hoya->name,
-            $hoya->local_name,
-            $hoya->author,
-            $hoya->origin,
-            implode(", ", array_map(function($spread) { return $spread["description"]; }, $hoya->hoyaSpreads->toArray())),
-            $hoya->information_type,
-            $hoya->publication,
-            $hoya->publication_link,
-            $hoya->etymology,
-            $hoya->benefit,
-            $hoya->stem,
-            $hoya->leaves,
-            $hoya->flowers,
-            $hoya->flower_buds,
-            $hoya->flower_size,
-            $hoya->flower_colors,
-            $hoya->roots,
-            $hoya->shoots,
-            $hoya->reproduction_system,
-            Date::dateTimeToExcel($hoya->created_at),
-            Date::dateTimeToExcel($hoya->updated_at),
-        ];
+        $hoyas = [$hoya->name];
+        $morfologies = collect($hoya->hoyaMorfologies ?? [])->map(function($item) { return $item->value; })->toArray();
+        return array_merge($hoyas, $morfologies);
     }
 
-    public function columnFormats(): array
-    {
-        return [
-            'S' => NumberFormat::FORMAT_DATE_YYYYMMDDSLASH,
-            'T' => NumberFormat::FORMAT_DATE_YYYYMMDDSLASH,
-        ];
-    }
+    // public function columnFormats(): array
+    // {
+    //     return [
+    //         'S' => NumberFormat::FORMAT_DATE_YYYYMMDDSLASH,
+    //         'T' => NumberFormat::FORMAT_DATE_YYYYMMDDSLASH,
+    //     ];
+    // }
 
     public function collection()
     {
-        return Hoya::all();
+        return Hoya::with("hoyaMorfologies")->get();
     }
 }
