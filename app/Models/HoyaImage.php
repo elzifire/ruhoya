@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
+use App\Models\Hoya;
+
 class HoyaImage extends Model
 {
     use HasFactory, SoftDeletes;
@@ -26,5 +28,10 @@ class HoyaImage extends Model
             // "description"   => "required",
             // "photographer"  => "required",
         ];
+    }
+
+    public function hoya()
+    {
+        return $this->hasOne(Hoya::class, "id", "hoya_id");
     }
 }

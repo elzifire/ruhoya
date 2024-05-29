@@ -20,31 +20,51 @@
 <section class="project-section p_relative pt_140 pb_130 centred">
     <div class="auto-container">
         <div class="items-container row clearfix">
-            @foreach (\App\Models\Hoya::all() as $hoya)
-                @foreach ($hoya->hoyaImages as $hoyaImage)
-                    <div class="col-lg-4 col-md-6 col-sm-12 project-block">
-                        <div class="project-block-one">
-                            <div class="inner-box p_relative d_block centred mb_30">
-                                <figure class="image-box p_relative d_block b_radius_5">
-                                    <img src="{{url('uploads/' . $hoyaImage->image)}}" alt="" />
-                                </figure>
-                                <div class="content-box p_absolute d_flex tran_5">
-                                    <div class="inner p_relative">
-                                        <div class="icon-box p_relative d_iblock fs_35 mb_20 b_radius_10 bg_white tran_5">
-                                            <i class="fas fa-spa"></i>
-                                        </div>
-                                        <h3 class="fs_22 color_white fw_medium mb_11 d_block tran_5">
-                                            <a href="#" class="d_iblock color_white">{{$hoya->name}}</a>
-                                        </h3>
+            @foreach ($data as $hoyaImage)
+                <div class="col-lg-4 col-md-6 col-sm-12 project-block">
+                    <div class="project-block-one">
+                        <div class="inner-box p_relative d_block centred mb_30">
+                            <figure class="image-box p_relative d_block b_radius_5">
+                                <img src="{{url('uploads/' . $hoyaImage->image)}}" alt="" />
+                            </figure>
+                            <div class="content-box p_absolute d_flex tran_5">
+                                <div class="inner p_relative">
+                                    <div class="icon-box p_relative d_iblock fs_35 mb_20 b_radius_10 bg_white tran_5">
+                                        <i class="fas fa-spa"></i>
                                     </div>
+                                    <h3 class="fs_22 color_white fw_medium mb_11 d_block tran_5">
+                                        <a href="{{url('database/' . $hoyaImage->hoya_id)}}" class="d_iblock color_white">Hoya <i>{{$hoyaImage->hoya?->name ?? ""}}</i></a>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
             @endforeach
         </div>
+        {{ $data->links() }}
     </div>
 </section>
+@push('css')
+    <style>
+        .pagination li a {
+            padding: 0 0.75rem !important;
+            width: 100%;
+            min-width: 50px;
+        }
+
+        .page-item.active .page-link {
+            background-color: #2f7955 !important;
+        }
+
+        .search-btn {
+            top: 0px;
+            right: 0px;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+@endpush
 <!-- project-section end -->
 @endsection

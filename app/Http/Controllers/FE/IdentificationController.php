@@ -45,8 +45,10 @@ class IdentificationController extends Controller
         $filtered = [];
         foreach ($contents as $content) {
             $similarity = 0;
+            $class = $content->hoyaMorfologies->filter(function($item) { return $item->value; });
+
             $this->checkCondition($content, $filters, $similarity);
-            $content->similarity = round(($similarity / count($keys)), 2);
+            $content->similarity = count($class) > 0 ? round(($similarity / count($class)), 2) : 0;
             
             if ($content->similarity >= (float)$threshold->value)
                 $filtered[] = $content;
