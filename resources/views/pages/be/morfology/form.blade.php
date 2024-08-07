@@ -2,7 +2,7 @@
     {{csrf_field()}}
     <div class="mb-3">
         <label for="group" class="form-label">Grup</label>
-        <select name="group" class="form-select">
+        <select name="group" class="form-select" disabled>
             <option value="" selected>-- Pilih --</option>
             @foreach ($groups as $group)
                 <option value="{{$group->value}}" {{(isset($data) && $data->group === $group->value) ? "selected" : ""}}>{{$group->value}}</option>
@@ -11,7 +11,7 @@
     </div>
     <div class="mb-3">
         <label for="name" class="form-label">Nama</label>
-        <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" required>
+        <input type="text" class="form-control" name="name" value="{{isset($data) ? $data['name'] : ''}}" required disabled>
     </div>
     <div class="mb-3">
         <div class="form-check form-switch">

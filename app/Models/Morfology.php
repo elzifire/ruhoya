@@ -20,8 +20,8 @@ class Morfology extends Model
     public static function rules()
     {
         return [
-            "group"  => "required",
-            "name"  => "required",
+            // "group"  => "required",
+            // "name"  => "required",
         ];
     }
 }

@@ -52,7 +52,7 @@ class MorfologyController extends Controller
                 ->addColumn('action', function($data) {
                     return view("components.action", [
                         "edit"      => url("admin/morfology/edit/".$data->id),
-                        "delete"    => url("admin/morfology/delete/".$data->id),
+                        // "delete"    => url("admin/morfology/delete/".$data->id),
                     ]);
                 })
                 ->rawColumns(['action'])
@@ -111,6 +111,7 @@ class MorfologyController extends Controller
         }
     
     }
+
     public function edit($id)
     {
         $action = url('admin/morfology/update/' . $id);
@@ -137,13 +138,14 @@ class MorfologyController extends Controller
 
         DB::beginTransaction();
         try {
+            $data   = Model::findOrFail($id);
+
             $options    = $payload["options"] ?? [];
             unset($payload["options"]);
 
-            $payload["slug"] = Str::snake($payload["name"]);
+            $payload["slug"] = Str::snake($data->name);
             $payload["yes_no_question"] = (isset($payload["yes_no_question"]) || !empty($payload["yes_no_question"])) ? 1 : 0;
 
-            $data   = Model::findOrFail($id);
             $data->update($payload);
 
             $morfologyIds   = [];

@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="flex gap-1">
-                        <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/morfology/create')}}', 'create', 'lg')">
+                        {{-- <button type="button" class="btn btn-primary btn-label" onclick="openForm('{{url('/admin/morfology/create')}}', 'create', 'lg')">
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <i class="bx bx-plus label-icon align-middle fs-16 me-2"></i>
@@ -16,7 +16,7 @@
                                     Tambah
                                 </div>
                             </div>
-                        </button>
+                        </button> --}}
                     </div>
                     <a href="javascript:void(0);" class="btn btn-success btn-label" data-refresh-btn>
                         <div class="d-flex">
