@@ -8,17 +8,16 @@
 />
 
 <!-- Stylesheets -->
-<link href="{{asset('FE/css/flaticon.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/owl.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/bootstrap.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/jquery.fancybox.min.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/animate.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/color.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/elpath.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/style.css')}}" rel="stylesheet" />
-<link href="{{asset('FE/css/responsive.css')}}" rel="stylesheet" />
-
-<link href="{{asset('FE/vendor/fontawesome/css/all.min.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/flaticon.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/owl.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/bootstrap.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/jquery.fancybox.min.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/animate.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/color.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/elpath.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/style.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/css/responsive.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/FE/vendor/fontawesome/css/all.min.css')}}" rel="stylesheet" />
 
 @stack('css')
 <style>

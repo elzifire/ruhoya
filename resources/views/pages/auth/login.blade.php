@@ -10,10 +10,10 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-    <script src="{{asset('BE/js/layout.js')}}"></script>
-    <link href="{{asset('BE/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('BE/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('BE/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('assets/BE/js/layout.js')}}"></script>
+    <link href="{{asset('assets/BE/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/BE/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/BE/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -93,11 +93,11 @@
         </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{asset('BE/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('BE/libs/simplebar/simplebar.min.js')}}"></script>
-    <script src="{{asset('BE/libs/node-waves/waves.min.js')}}"></script>
-    <script src="{{asset('BE/libs/feather-icons/feather.min.js')}}"></script>
-    <script src="{{asset('BE/js/alert.js')}}"></script>
+    <script src="{{asset('assets/BE/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/BE/libs/simplebar/simplebar.min.js')}}"></script>
+    <script src="{{asset('assets/BE/libs/node-waves/waves.min.js')}}"></script>
+    <script src="{{asset('assets/BE/libs/feather-icons/feather.min.js')}}"></script>
+    <script src="{{asset('assets/BE/js/alert.js')}}"></script>
 
     <!-- password-addon init -->
     <script src="{{asset('BE/js/pages/password-addon.init.js')}}"></script>

@@ -23,6 +23,32 @@ class AuthController extends Controller
         return view("pages.auth.login");
     }
 
+    public function register()
+    {
+        return view("pages.auth.register");
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required|min:6',
+        ]);
+
+        $user = User::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => bcrypt($request->password),
+        ]);
+
+        if ($user) {
+            return redirect('/login')->with('success', 'Registrasi berhasil, silahkan login');
+        }else{
+            return redirect('/register')->with('error', 'Registrasi gagal, silahkan coba lagi');
+        }
+    }
+
     public function login(Request $request)
     {
         $response = new ResponseModel(HttpStatus::NOT_FOUND, HttpMessage::AUTH_NO_RECORD);

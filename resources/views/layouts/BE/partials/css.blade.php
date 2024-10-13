@@ -7,13 +7,13 @@
 
 
 <!-- Layout config Js -->
-<script src="{{asset('BE/js/layout.js')}}"></script>
+<script src="{{asset('assets/BE/js/layout.js')}}"></script>
 <!-- Bootstrap Css -->
-<link href="{{asset('BE/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/BE/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 <!-- Icons Css -->
-<link href="{{asset('BE/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/BE/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
-<link href="{{asset('BE/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/BE/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
 <!-- Page CSS -->
 @stack('css')

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get("/clear", function() {
-    $exitCode1  = Artisan::call('config:cache');
-    $exitCode2  = Artisan::call('route:clear');
-    $exitCode3  = Artisan::call('view:clear');
-});
+// Route::get("/clear", function() {
+//     $exitCode1  = Artisan::call('config:cache');
+//     $exitCode2  = Artisan::call('route:clear');
+//     $exitCode3  = Artisan::call('view:clear');
+// });
 
-Route::get("/migrate", function() {
-    $exitCode1  = Artisan::call('migrate');
-});
+// Route::get("/migrate", function() {
+//     $exitCode1  = Artisan::call('migrate');
+// });
 
 Route::get("/", "FE\HomeController@index");
 Route::get("/tentang", "FE\AboutController@index");
@@ -34,6 +35,10 @@ Route::middleware("guest")->group(function() {
     Route::get("login", "AuthController@index")->name("login");
     Route::post("login", "AuthController@login");
 });
+
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+
+Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 
 Route::middleware("auth")->group(function() {
     Route::get("logout", "AuthController@logout");

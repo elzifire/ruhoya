@@ -30,6 +30,11 @@ use DataTables;
 class HoyaController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $dnaTypes = Enumeration::where("key", "DNASequenceType")->get();

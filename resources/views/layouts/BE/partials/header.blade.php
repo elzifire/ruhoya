@@ -42,7 +42,9 @@
                 <div class="dropdown header-item">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="{{asset('BE/images/users/avatar-4.jpg')}}" alt="Header Avatar">
+                            {{-- <img class="rounded-circle header-profile-user" src="{{asset('BE/images/users/avatar-4.jpg')}}" alt="Header Avatar"> --}}
+                            {{-- <img class="rounded-circle header-profile-user" src="{{asset('BE/images/users/avatar-4.jpg')}}" alt="Header Avatar"> --}}
+                            <i class="las la-user-circle fs-24"></i>
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block fw-medium user-name-text fs-16">{{\Auth::user()->name}} <i class="las la-angle-down fs-12 ms-1"></i></span>
                             </span>
