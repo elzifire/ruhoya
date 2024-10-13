@@ -1,3 +1,10 @@
+<!-- title -->
+# Ruhoya
+<!-- description -->
+Ruhoya is a web application that allows users to create and share their dreams with the world. Users can also view and comment on other users' dreams. The application is built using Laravel 10.
+
+## Installation
+
 ```bash
 git clone https://github.com/elzifire/ruhoya.git
 ```

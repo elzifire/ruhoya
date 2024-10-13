@@ -34,13 +34,21 @@ Route::get("/database/{id}", "FE\DatabaseController@find");
 Route::middleware("guest")->group(function() {
     Route::get("login", "AuthController@index")->name("login");
     Route::post("login", "AuthController@login");
+    
+    Route::get("forgot-password", [AuthController::class, 'forgot'])->name('forgot');
+    Route::post("forgot-password", [AuthController::class, 'sendResetLinkEmail'])->name('forgot.send');
+
+    Route::get("validate-reset-password", [AuthController::class, 'validateResetPassword'])->name('validate-reset-password');
+    Route::post("validate-reset-password", [AuthController::class, 'resetPassword'])->name('validate-reset-password.reset');
 });
+
+
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 
-Route::middleware("auth")->group(function() {
+Route::middleware("auth", "admin")->group(function() {
     Route::get("logout", "AuthController@logout");
     
     Route::prefix("admin")->group(function() {

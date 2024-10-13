@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Helpers\HttpStatus;
 use App\Helpers\HttpMessage;
 
 use App\Models\Base\ResponseModel;
+use App\Models\PasswordResetToken;
 use App\Models\User;
+
 
 use DB;
 
@@ -76,7 +79,37 @@ class AuthController extends Controller
 
     public function forgot()
     {
-        return view("forgot-password");
+        return view("pages.auth.forgot");
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $mesaage = [
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Email tidak valid',
+            'email.exists' => 'Email tidak terdaftar di sistem',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], $mesaage); 
+
+        PasswordResetToken::updateOrCreate(
+        [
+            'email' => $request->email,
+        ].
+        [
+            'email' => $request->email,
+            'token' => Str::random(60),
+            'created_at' => now(),
+        ]);
+
+        $data = [
+            'email' => $request->email,
+        ];
+
+        return redirect()->route('forgot')->with('success', 'Email reset password telah dikirim');
+       
     }
 
     public function changePassword(Request $request)
@@ -109,4 +142,7 @@ class AuthController extends Controller
             return response()->json(["status_code" => 500, "message" => $e->getMessage(), "data" => null]);
         }
     }
+
+
+
 }
