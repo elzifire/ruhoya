@@ -50,7 +50,12 @@
                 </nav>
             </div>
             <div class="nav-right">
-                <div class="btn-box"><a href="{{url('/login')}}" class="theme-btn btn-one">Login</a></div>
+                <div class="btn-box">
+                    <a href="{{url('/login')}}" class="theme-btn btn-one">Login</a>
+                </div>
+                <div class="btn-box">
+                    <a href="{{ route('register') }}" class="theme-btn btn-one mx-2">Daftar</a>
+                </div>
             </div>
         </div>
     </div>

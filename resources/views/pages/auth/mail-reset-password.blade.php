@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('assets/BE/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <title>template email lupa password</title>
+    <title>email lupa password</title>
 </head>
 <body>
     <div class="container">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <p>Klik link dibawah ini untuk mereset password anda</p>
-                        <a href="{{ route('reset', ['token' => $token]) }}" class="btn btn-primary">Reset Password</a>
+                        <a href="{{ route('validasi-forgot-password', ['token' => $token]) }}" class="btn btn-primary">Reset Password</a>
                     </div>
                     <div class="card-footer">
                         <p>Terima kasih</p>
@@ -26,6 +26,6 @@
             </div>
         </div>        
     </div>    
-
+{{-- @dd($token) --}}
 </body>
 </html>

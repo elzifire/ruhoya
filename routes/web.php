@@ -38,10 +38,9 @@ Route::middleware("guest")->group(function() {
     Route::get("forgot-password", [AuthController::class, 'forgot'])->name('forgot');
     Route::post("forgot-password", [AuthController::class, 'sendResetLinkEmail'])->name('forgot.send');
 
-    Route::get("validate-reset-password", [AuthController::class, 'validateResetPassword'])->name('validate-reset-password');
-    Route::post("validate-reset-password", [AuthController::class, 'resetPassword'])->name('validate-reset-password.reset');
+    Route::get('/validasi-forgot-password/{token}', [AuthController::class, 'validasi_forgot_password'])->name('validasi-forgot-password');
+    Route::post('/validasi-forgot-password-act',    [AuthController::class, 'validasi_forgot_password_act'])->name('validasi-forgot-password-act');
 });
-
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');

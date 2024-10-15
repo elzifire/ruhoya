@@ -10,13 +10,14 @@ use Illuminate\Support\Str;
 
 use App\Helpers\HttpStatus;
 use App\Helpers\HttpMessage;
-
+use App\Mail\ResetPasswordMail;
 use App\Models\Base\ResponseModel;
 use App\Models\PasswordResetToken;
 use App\Models\User;
 
 
 use DB;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -77,40 +78,7 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function forgot()
-    {
-        return view("pages.auth.forgot");
-    }
-
-    public function sendResetLinkEmail(Request $request)
-    {
-        $mesaage = [
-            'email.required' => 'Email harus diisi',
-            'email.email' => 'Email tidak valid',
-            'email.exists' => 'Email tidak terdaftar di sistem',
-        ];
-
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ], $mesaage); 
-
-        PasswordResetToken::updateOrCreate(
-        [
-            'email' => $request->email,
-        ].
-        [
-            'email' => $request->email,
-            'token' => Str::random(60),
-            'created_at' => now(),
-        ]);
-
-        $data = [
-            'email' => $request->email,
-        ];
-
-        return redirect()->route('forgot')->with('success', 'Email reset password telah dikirim');
-       
-    }
+    
 
     public function changePassword(Request $request)
     {
@@ -142,7 +110,91 @@ class AuthController extends Controller
             return response()->json(["status_code" => 500, "message" => $e->getMessage(), "data" => null]);
         }
     }
+    public function forgot()
+    {
+        return view("pages.auth.forgot");
+    }
 
+    public function sendResetLinkEmail(Request $request)
+    {
+        $mesaage = [
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Email tidak valid',
+            'email.exists' => 'Email tidak terdaftar di sistem',
+        ];
 
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], $mesaage); 
+
+        $token = Str::random(60);
+        
+        PasswordResetToken::updateOrCreate(
+            [
+                'email' => $request->email,
+            ],
+            [
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
+
+        
+        Mail::to($request->email)->send(new ResetPasswordMail($token));
+
+        
+        return redirect()->route('forgot')->with('success', 'Email reset password telah dikirim');
+       
+    }
+
+    
+    
+    public function validasi_forgot_password(Request $request, $token)
+    {
+        $getToken = PasswordResetToken::where('token', $token)->first();
+
+        if (!$getToken) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+
+        return view('pages.auth.validasi-token', compact('token'));
+    }
+
+    public function validasi_forgot_password_act(Request $request)
+    {
+        $customMessage = [
+            'password.required' => 'Password tidak boleh kosong',
+        ];
+    
+        $request->validate([
+            'password' => 'required'
+        ], $customMessage);
+    
+        // Cek apakah token valid
+        $token = PasswordResetToken::where('token', $request->token)->first();
+    
+        if (!$token) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+    
+        // Ambil pengguna berdasarkan email yang terkait dengan token
+        $user = User::where('email', $token->email)->first();
+    
+        if (!$user) {
+            return redirect()->route('login')->with('failed', 'Email tidak terdaftar di database');
+        }
+    
+        // Update password pengguna yang sesuai
+        $user->update([
+            'password' => bcrypt($request->password),
+        ]);
+    
+        // Optional: Hapus token setelah digunakan
+        // $token->delete();
+    
+        return redirect()->route('login')->with('success', 'Password berhasil direset');
+    }
+    
 
 }
